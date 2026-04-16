@@ -74,13 +74,13 @@ const RefreshCw = (p) => <Icon name="RefreshCw" {...p} />;
 
 // --- ESTRUCTURAS DE DATOS ---
 const FACILITIES = {
-  "Campo Grande": { color: "bg-green-100 text-green-800 border-green-200", badge: "bg-green-500", icon: "⚽", defaultRef: "Óscar / Valld. 1 / Tarancón 1" },
-  "Campo Pequeño": { color: "bg-emerald-100 text-emerald-800 border-emerald-200", badge: "bg-emerald-500", icon: "⚽", defaultRef: "David / Valld. 2 / Tarancón 2" },
-  "Gimnasio": { color: "bg-orange-100 text-orange-800 border-orange-200", badge: "bg-orange-500", icon: "🏀", defaultRef: "Julia / Valladolid 3" },
-  "Piscina": { color: "bg-cyan-100 text-cyan-800 border-cyan-200", badge: "bg-cyan-500", icon: "🏊", defaultRef: "María / Valld. 4 / Tarancón 3" },
-  "Pádel": { color: "bg-lime-100 text-lime-800 border-lime-200", badge: "bg-lime-500", icon: "🎾", defaultRef: "Julia / Valladolid 5" },
+  "Campo Grande": { color: "bg-green-100 text-green-800 border-green-200", badge: "bg-green-500", icon: "⚽", defaultRef: "Óscar / Valld. 1" },
+  "Campo Pequeño": { color: "bg-emerald-100 text-emerald-800 border-emerald-200", badge: "bg-emerald-500", icon: "⚽", defaultRef: "David / Valld. 2" },
+  "Gimnasio": { color: "bg-orange-100 text-orange-800 border-orange-200", badge: "bg-orange-500", icon: "🏀", defaultRef: "Julia / Valld. 3" },
+  "Piscina": { color: "bg-cyan-100 text-cyan-800 border-cyan-200", badge: "bg-cyan-500", icon: "🏊", defaultRef: "María / Valld. 4" },
+  "Pádel": { color: "bg-lime-100 text-lime-800 border-lime-200", badge: "bg-lime-500", icon: "🎾", defaultRef: "Julia / Valld. 5" },
   "Arena Ajedrez": { color: "bg-purple-100 text-purple-800 border-purple-200", badge: "bg-purple-500", icon: "♟️", defaultRef: "Valladolid 7" },
-  "Arena Petanca": { color: "bg-slate-100 text-slate-800 border-slate-200", badge: "bg-slate-500", icon: "🎱", defaultRef: "Sergio / Valld. 6 / Tarancón 4" },
+  "Arena Petanca": { color: "bg-slate-100 text-slate-800 border-slate-200", badge: "bg-slate-500", icon: "🎱", defaultRef: "Sergio / Valld. 6" },
   "Cross": { color: "bg-red-100 text-red-800 border-red-200", badge: "bg-red-500", icon: "🏃", defaultRef: "Juan / Gaspar" }
 };
 
@@ -101,8 +101,8 @@ const SPORT_TO_FACILITY = {
   'Cross': ['Cross']
 };
 
-// --- COMPRESIÓN DE HORARIOS Y ASIGNACIÓN EXHAUSTIVA DE CATEGORÍAS SEGÚN EL PDF ---
-const SCHED_RAW = "10:20 - 10:30^Campo Grande|SB - SF|INF MAS|Marcos Serrano^Campo Pequeño|SB - MC|INF MAS|Bruno^Piscina|50m (series)|INF MAS|Hugo Naranjo / Yago / Daniela^Pádel|MC - SF|INF MAS|Gonzalo / Edu^Cross|Carrera|INF MAS|Lavinia~10:30 - 10:40^Arena Ajedrez|Libre para recreos|INF FEM|~10:45 - 10:50^Campo Grande|MC - SF|ALEV MAS|Reppeto^Campo Pequeño|SF - SB|ALEV MAS|Luis^Piscina|50m (series)|ALEV MAS|Hugo Naranjo / Yago / Daniela^Pádel|SF - SB|ALEV MAS|Gonzalo / Edu^Arena Ajedrez|Libre para recreos|ALEV MAS|~10:50 - 11:05^Arena Ajedrez|Libre para recreos|ALEV FEM|^Arena Petanca|Juego|INF FEM|^Cross|Carrera|ALEV FEM|~11:05 - 11:10^Piscina|50m|BENJ MAS|^Pádel|SB - MC|BENJ MAS|^Arena Ajedrez|Libre para recreos|BENJ MAS|^Cross|Carrera|BENJ MAS|Irene Perez~11:10 - 11:20^Campo Grande|SB - MC|BENJ FEM|Aaron^Campo Pequeño|MC - SF|BENJ FEM|Sebastián^Arena Ajedrez|Libre para recreos|BENJ FEM|^Cross|Carrera|BENJ FEM|Del Cerro~11:20 - 11:30^Gimnasio|MC - SF|ALEV MAS|^Arena Ajedrez|Libre para recreos|ALEV MAS|^Arena Petanca|Juego|ALEV MAS|~11:30 - 11:40^Piscina|Relevos|ALEVIN|^Pádel|SF - SB|ALEVIN|Gonzalo / Edu~11:40 - 11:50^Campo Grande|SB - MC|CAD MAS|Marcos^Campo Pequeño|SB - MC|CAD MAS|Bruno^Gimnasio|SF - SB|CAD MAS|Lucia / Monica / Elsa^Piscina|200m (hasta :55)|CAD MAS|Hugo Naranjo / Yago / Daniela^Arena Ajedrez|Juego|CAD MAS|Briongos^Arena Petanca|Juego|CAD MAS|Samuel Diaz~11:50 - 12:00^Cross|Carrera|ALEV FEM|~12:00 - 12:10^Gimnasio|MC - SB|CADETE|Lucia / Monica / Elsa^Pádel|SF - SB|CADETE|Adrian / Daniel^Arena Ajedrez|Juego|GENERAL|Miguel^Arena Petanca|Juego|GENERAL|Hugo Camino^Cross|Carrera|GENERAL|Nicolas Gomez~12:10 - 12:20^Piscina|200 M (hasta :25)|COMPETICIÓN|Sara Pellicer / Kevin / Angel Marmol^Cross|Carrera|GENERAL|Yang~12:20 - 12:30^Campo Grande|MC - SF|CAD MAS|Ruben Sanz~12:30 - 12:35^Campo Pequeño|SB - MC|CAD FEM|Mónica / Candela / Marina^Piscina|200 M (hasta :40)|COMPETICIÓN|Adrian / Daniel^Pádel|SF - SB|CADETE|Adrian / Daniel^Arena Ajedrez|Juego|CADETE|Marcos Incze^Arena Petanca|Juego|CADETE|reppeto^Cross|Carrera|CADETE|Sergio Ortez~12:40 - 12:50^Campo Grande|SF - SB|CAD MAS|Santiago Gascon^Piscina|200 M|CADETE|Sara Pellicer / Kevin / Angel Marmol^Arena Ajedrez|Juego|GENERAL|Carla Emily^Arena Petanca|Juego|GENERAL|Marcos^Cross|Carrera|GENERAL|Iker quesada~12:50 - 12:55^Arena Ajedrez|Juego|CAD FEM|Mendieta^Arena Petanca|Juego|CAD FEM|Bruno^Cross|Carrera|CAD FEM|~13:00 - 13:10^Campo Grande|SB - MC|CAD MAS|Gael Gutierrez^Cross|Carrera|GENERAL|Samuel Gutierrez~13:10 - 13:15^Campo Grande|MC - SF|CAD FEM|^Pádel|MC - SF|INFANTIL|^Cross|Carrera|GENERAL|Triana~13:20 - 13:30^Campo Grande|SF - SB|CAD MAS|Mendieta^Campo Pequeño|SB - MC|CAD FEM|Adrian^Gimnasio|MC - SF|INFANTIL|~13:30 - 13:35^Piscina|Relevos|INFANTIL|Lucia Fernandez / Melania / Clara^Pádel|SF - SB|INFANTIL|Ruben Sanz~13:40 - 13:50^Campo Grande|MC - SF|CAD MAS|Santiago gascon^Campo Pequeño|SF - SB|CAD FEM|Iker quesada^Gimnasio|SF - SB|INFANTIL|Miguel y Gael^Piscina|Relevos|CADETE|Aaron~13:50 - 13:55^Pádel|SB - MC|INFANTIL|Adrian / Daniel~14:00 - 14:10^Campo Grande|SB - MC|INF MAS|Marcos Serrano^Campo Pequeño|MC - SF|INF FEM|Bruno^Gimnasio|MC - SB|CAD MAS|Lucia / Monica / Elsa^Piscina|Libre|GENERAL|Sara Pellicer~14:20 - 14:30^Campo Grande|SB - MC|INF MAS|Santiago Gascon^Campo Pequeño|SB - MC|INF FEM|Iker quesada^Gimnasio|SB - MC|CAD MAS|Miguel y Gael^Piscina|SB - SF|ALEVIN|Hugo Naranjo^Pádel|SB - MC|ALEVIN|Gonzalo / Edu^Arena Ajedrez|SB - MC|ALEVIN|Marcos Incze~14:30 - 14:40^Campo Grande|SB - SF|INF MAS|Gael Gutierrez^Campo Pequeño|SB - SF|INF FEM|Sebastián^Gimnasio|SB - SF|CAD MAS|Mónica / Candela^Piscina|SB - SF|ALEVIN|Aaron~14:40 - 14:50^Campo Grande|SF - MC|INF MAS|Reppeto^Campo Pequeño|SF - MC|INF FEM|Luis^Gimnasio|SF - MC|CAD MAS|Adrian^Piscina|SF - MC|INFANTIL|Kevin~14:50 - 15:00^Campo Grande|Entrega de Trofeos y Clausura|GENERAL|Organización";
+// --- HORARIO REVISADO EXHAUSTIVAMENTE (SIN "PARTIDO" O "GENERAL" GENÉRICOS POR LA TARDE) ---
+const SCHED_RAW = "10:20 - 10:40^Campo Grande|SB - MC|ALE MASC|Óscar^Campo Pequeño|SB - MC|ALE FEM|David^Pádel|SF - SB|CAD FEM|Julia^Cross|1600m|INFANTIL|Juan~10:45 - 11:05^Campo Grande|SB - SF|ALE MASC|Óscar^Campo Pequeño|SB - SF|ALE FEM|David^Pádel|MC - SF|CAD FEM|Julia^Cross|Carrera|ALEVIN|Gaspar~11:10 - 11:30^Campo Grande|SF - MC|ALE MASC|Óscar^Campo Pequeño|SF - MC|ALE FEM|David^Gimnasio|MC - SF|ALE MIXTO|Julia^Arena Ajedrez|Juego|ALEVIN|Valladolid 7~11:40 - 12:00^Campo Grande|SB - MC|INF MAS|Óscar^Campo Pequeño|SB - MC|INF FEM|David^Gimnasio|SF - SB|CAD MIXTO|Julia^Piscina|200m|CAD MASC|María^Arena Petanca|Juego|INFANTIL|Sergio~12:00 - 12:20^Campo Grande|SB - SF|INF MAS|Óscar^Campo Pequeño|SB - SF|INF FEM|David^Gimnasio|MC - SB|CAD MIXTO|Julia^Pádel|SF - SB|CAD MAS|Julia^Cross|Carrera|CADETE|Juan~12:20 - 12:40^Campo Grande|SF - MC|INF MAS|Óscar^Campo Pequeño|SF - MC|INF FEM|David^Piscina|200 M|CAD FEM|María^Pádel|SB - MC|CAD MAS|Julia~12:40 - 13:00^Campo Grande|SB - MC|CAD MAS|Óscar^Campo Pequeño|SB - MC|CAD FEM|David^Gimnasio|MC - SF|INF MIXTO|Julia^Arena Ajedrez|Juego|CADETE|Valladolid 7~13:00 - 13:20^Campo Grande|SB - SF|CAD MAS|Óscar^Campo Pequeño|SB - SF|CAD FEM|David^Gimnasio|SF - SB|INF MIXTO|Julia^Pádel|SF - SB|INF MAS|Julia~13:20 - 13:40^Campo Grande|SF - MC|CAD MAS|Óscar^Campo Pequeño|SF - MC|CAD FEM|David^Gimnasio|MC - SB|INF MIXTO|Julia^Piscina|50 M|ALEVIN|María~13:40 - 14:00^Piscina|Relevos|INFANTIL|María^Pádel|MC - SF|INF MAS|Julia^Arena Petanca|Juego|CADETE|Sergio~14:00 - 14:20^Piscina|Relevos|CADETE|María^Pádel|SB - MC|INF FEM|Julia^Cross|Carrera|GENERAL|Juan~14:50 - 15:00^Campo Grande|Entrega de Trofeos y Clausura|CLAUSURA|Organización";
 
 const buildSchedule = () => SCHED_RAW.split('~').map(slotStr => {
   const [time, ...eventsStr] = slotStr.split('^');
@@ -450,7 +450,7 @@ export default function App() {
     return schedule.map(slot => {
       const filteredEvents = slot.events.filter(event => {
         if (showMyRoute && favoriteAthletesFullData.length > 0) {
-          const isGeneral = event.category === "GENERAL" || event.category === "COMPETICIÓN";
+          const isGeneral = event.category === "GENERAL" || event.category === "COMPETICIÓN" || event.category === "CLAUSURA";
           if (isGeneral) return true;
 
           const matchesFav = favoriteAthletesFullData.some(fav => {
@@ -847,7 +847,7 @@ export default function App() {
                     {showMyRoute && (
                       <button 
                         onClick={shareWhatsApp} 
-                        className="flex-1 sm:flex-none px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-[16px] text-white text-xs sm:text-sm font-black transition-all shadow-sm bg-green-500 hover:bg-green-600 flex items-center justify-center"
+                        className="flex-1 sm:flex-none px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-[16px] text-white text-xs sm:text-sm font-black transition-all shadow-sm bg-green-50 hover:bg-green-600 flex items-center justify-center"
                       >
                         <Send className="w-4 h-4 sm:mr-2" /> <span className="hidden sm:inline">Enviar</span>
                       </button>
