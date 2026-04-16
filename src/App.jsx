@@ -8,7 +8,7 @@ if (typeof document !== 'undefined' && !document.getElementById('tailwind-cdn'))
   document.head.appendChild(script);
 }
 
-// --- ICONOS INTEGRADOS (Cero Dependencias) ---
+// --- ICONOS INTEGRADOS COMPRIMIDOS (Sin dependencias externas) ---
 const Icons = {
   MapPin: <g><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></g>,
   Calendar: <g><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></g>,
@@ -49,12 +49,10 @@ const Icon = ({ name, className = "" }) => (
 const MapPin = (p) => <Icon name="MapPin" {...p} />;
 const Calendar = (p) => <Icon name="Calendar" {...p} />;
 const Clock = (p) => <Icon name="Clock" {...p} />;
-const Trophy = (p) => <Icon name="Trophy" {...p} />;
 const Filter = (p) => <Icon name="Filter" {...p} />;
 const Users = (p) => <Icon name="Users" {...p} />;
 const Activity = (p) => <Icon name="Activity" {...p} />;
 const Medal = (p) => <Icon name="Medal" {...p} />;
-const ExternalLink = (p) => <Icon name="ExternalLink" {...p} />;
 const MapIcon = (p) => <Icon name="MapIcon" {...p} />;
 const ClipboardList = (p) => <Icon name="ClipboardList" {...p} />;
 const Search = (p) => <Icon name="Search" {...p} />;
@@ -62,7 +60,6 @@ const ChevronRight = (p) => <Icon name="ChevronRight" {...p} />;
 const X = (p) => <Icon name="X" {...p} />;
 const FileText = (p) => <Icon name="FileText" {...p} />;
 const Star = (p) => <Icon name="Star" {...p} />;
-const Info = (p) => <Icon name="Info" {...p} />;
 const Sparkles = (p) => <Icon name="Sparkles" {...p} />;
 const Timer = (p) => <Icon name="Timer" {...p} />;
 const Navigation = (p) => <Icon name="Navigation" {...p} />;
@@ -77,14 +74,14 @@ const RefreshCw = (p) => <Icon name="RefreshCw" {...p} />;
 
 // --- ESTRUCTURAS DE DATOS ---
 const FACILITIES = {
-  "Campo Grande": { color: "bg-green-100 text-green-800 border-green-200", badge: "bg-green-500", icon: "⚽" },
-  "Campo Pequeño": { color: "bg-emerald-100 text-emerald-800 border-emerald-200", badge: "bg-emerald-500", icon: "⚽" },
-  "Gimnasio": { color: "bg-orange-100 text-orange-800 border-orange-200", badge: "bg-orange-500", icon: "🏀" },
-  "Piscina": { color: "bg-cyan-100 text-cyan-800 border-cyan-200", badge: "bg-cyan-500", icon: "🏊" },
-  "Pádel": { color: "bg-lime-100 text-lime-800 border-lime-200", badge: "bg-lime-500", icon: "🎾" },
-  "Arena Ajedrez": { color: "bg-purple-100 text-purple-800 border-purple-200", badge: "bg-purple-500", icon: "♟️" },
-  "Arena Petanca": { color: "bg-slate-100 text-slate-800 border-slate-200", badge: "bg-slate-500", icon: "🎱" },
-  "Cross": { color: "bg-red-100 text-red-800 border-red-200", badge: "bg-red-500", icon: "🏃" }
+  "Campo Grande": { color: "bg-green-100 text-green-800 border-green-200", badge: "bg-green-500", icon: "⚽", defaultRef: "Óscar / Valld. 1 / Tarancón 1" },
+  "Campo Pequeño": { color: "bg-emerald-100 text-emerald-800 border-emerald-200", badge: "bg-emerald-500", icon: "⚽", defaultRef: "David / Valld. 2 / Tarancón 2" },
+  "Gimnasio": { color: "bg-orange-100 text-orange-800 border-orange-200", badge: "bg-orange-500", icon: "🏀", defaultRef: "Julia / Valladolid 3" },
+  "Piscina": { color: "bg-cyan-100 text-cyan-800 border-cyan-200", badge: "bg-cyan-500", icon: "🏊", defaultRef: "María / Valld. 4 / Tarancón 3" },
+  "Pádel": { color: "bg-lime-100 text-lime-800 border-lime-200", badge: "bg-lime-500", icon: "🎾", defaultRef: "Julia / Valladolid 5" },
+  "Arena Ajedrez": { color: "bg-purple-100 text-purple-800 border-purple-200", badge: "bg-purple-500", icon: "♟️", defaultRef: "Valladolid 7" },
+  "Arena Petanca": { color: "bg-slate-100 text-slate-800 border-slate-200", badge: "bg-slate-500", icon: "🎱", defaultRef: "Sergio / Valld. 6 / Tarancón 4" },
+  "Cross": { color: "bg-red-100 text-red-800 border-red-200", badge: "bg-red-500", icon: "🏃", defaultRef: "Juan / Gaspar" }
 };
 
 const SCHOOLS = {
@@ -104,232 +101,53 @@ const SPORT_TO_FACILITY = {
   'Cross': ['Cross']
 };
 
-const INITIAL_SCHEDULE = [
-  { time: "10:20 - 10:30", events: [
-      { facility: "Campo Grande", title: "SB - SF", category: "INF MAS", referee: "Marcos Serrano" },
-      { facility: "Campo Pequeño", title: "SB - MC", category: "INF MAS", referee: "Bruno" },
-      { facility: "Piscina", title: "50m (series)", category: "INF MAS", referee: "Hugo Naranjo / Yago / Daniela" },
-      { facility: "Pádel", title: "MC - SF", category: "INF MAS", referee: "Gonzalo / Edu" },
-      { facility: "Cross", title: "Carrera", category: "INF MAS", referee: "Lavinia" }
-    ]
-  },
-  { time: "10:30 - 10:40", events: [
-      { facility: "Arena Ajedrez", title: "Libre para recreos", category: "INF FEM" }
-    ]
-  },
-  { time: "10:45 - 10:50", events: [
-      { facility: "Campo Grande", title: "MC - SF", category: "ALEV MAS", referee: "Reppeto" },
-      { facility: "Campo Pequeño", title: "SF - SB", category: "ALEV MAS", referee: "Luis" },
-      { facility: "Piscina", title: "50m (series)", category: "ALEV MAS", referee: "Hugo Naranjo / Yago / Daniela" },
-      { facility: "Pádel", title: "SF - SB", category: "ALEV MAS", referee: "Gonzalo / Edu" },
-      { facility: "Arena Ajedrez", title: "Libre para recreos", category: "ALEV MAS" }
-    ]
-  },
-  { time: "10:50 - 11:05", events: [
-      { facility: "Arena Ajedrez", title: "Libre para recreos", category: "ALEV FEM" },
-      { facility: "Arena Petanca", title: "Juego", category: "INF FEM" },
-      { facility: "Cross", title: "Carrera", category: "ALEV FEM" }
-    ]
-  },
-  { time: "11:05 - 11:10", events: [
-      { facility: "Piscina", title: "50m", category: "BENJ MAS" },
-      { facility: "Pádel", title: "SB - MC", category: "BENJ MAS" },
-      { facility: "Arena Ajedrez", title: "Libre para recreos", category: "BENJ MAS" },
-      { facility: "Cross", title: "Carrera", category: "BENJ MAS", referee: "Irene Perez" }
-    ]
-  },
-  { time: "11:10 - 11:20", events: [
-      { facility: "Campo Grande", title: "SB - MC", category: "BENJ FEM", referee: "Aaron" },
-      { facility: "Campo Pequeño", title: "MC - SF", category: "BENJ FEM", referee: "Sebastián" },
-      { facility: "Arena Ajedrez", title: "Libre para recreos", category: "BENJ FEM" },
-      { facility: "Cross", title: "Carrera", category: "BENJ FEM", referee: "Del Cerro" }
-    ]
-  },
-  { time: "11:20 - 11:30", events: [
-      { facility: "Gimnasio", title: "MC - SF", category: "ALEV MAS" },
-      { facility: "Arena Ajedrez", title: "Libre para recreos", category: "ALEV MAS" },
-      { facility: "Arena Petanca", title: "Juego", category: "ALEV MAS" }
-    ]
-  },
-  { time: "11:30 - 11:40", events: [
-      { facility: "Piscina", title: "Relevos", category: "ALEVIN" },
-      { facility: "Pádel", title: "SF - SB", category: "ALEVIN", referee: "Gonzalo / Edu" }
-    ]
-  },
-  { time: "11:40 - 11:50", events: [
-      { facility: "Campo Grande", title: "SB - MC", category: "CAD MAS", referee: "Marcos" },
-      { facility: "Campo Pequeño", title: "SB - MC", category: "CAD MAS", referee: "Bruno" },
-      { facility: "Gimnasio", title: "SF - SB", category: "CAD MAS", referee: "Lucia / Monica / Elsa" },
-      { facility: "Piscina", title: "200m (hasta :55)", category: "CAD MAS", referee: "Hugo Naranjo / Yago / Daniela" },
-      { facility: "Arena Ajedrez", title: "Juego", category: "CAD MAS", referee: "Briongos" },
-      { facility: "Arena Petanca", title: "Juego", category: "CAD MAS", referee: "Samuel Diaz" }
-    ]
-  },
-  { time: "11:50 - 12:00", events: [
-      { facility: "Cross", title: "Carrera", category: "ALEV FEM" }
-    ]
-  },
-  { time: "12:00 - 12:10", events: [
-      { facility: "Gimnasio", title: "MC - SB", category: "PARTIDO", referee: "Lucia / Monica / Elsa" },
-      { facility: "Pádel", title: "SF - SB", category: "PARTIDO", referee: "Adrian / Daniel" },
-      { facility: "Arena Ajedrez", title: "Juego", category: "GENERAL", referee: "Miguel" },
-      { facility: "Arena Petanca", title: "Juego", category: "GENERAL", referee: "Hugo Camino" },
-      { facility: "Cross", title: "Carrera", category: "GENERAL", referee: "Nicolas Gomez" }
-    ]
-  },
-  { time: "12:10 - 12:20", events: [
-      { facility: "Piscina", title: "200 M (hasta :25)", category: "COMPETICIÓN", referee: "Sara Pellicer / Kevin / Angel Marmol" },
-      { facility: "Cross", title: "Carrera", category: "GENERAL", referee: "Yang" }
-    ]
-  },
-  { time: "12:20 - 12:30", events: [
-      { facility: "Campo Grande", title: "MC - SF", category: "CAD MAS", referee: "Ruben Sanz" }
-    ]
-  },
-  { time: "12:30 - 12:35", events: [
-      { facility: "Campo Pequeño", title: "SB - MC", category: "PARTIDO", referee: "Mónica / Candela / Marina" },
-      { facility: "Piscina", title: "200 M (hasta :40)", category: "COMPETICIÓN", referee: "Adrian / Daniel" },
-      { facility: "Pádel", title: "SF - SB", category: "PARTIDO", referee: "Adrian / Daniel" },
-      { facility: "Arena Ajedrez", title: "Juego", category: "GENERAL", referee: "Marcos Incze" },
-      { facility: "Arena Petanca", title: "Juego", category: "GENERAL", referee: "reppeto" },
-      { facility: "Cross", title: "Carrera", category: "GENERAL", referee: "Sergio Ortez" }
-    ]
-  },
-  { time: "12:40 - 12:50", events: [
-      { facility: "Campo Grande", title: "SF - SB", category: "PARTIDO", referee: "Santiago Gascon" },
-      { facility: "Piscina", title: "200 M", category: "COMPETICIÓN", referee: "Sara Pellicer / Kevin / Angel Marmol" },
-      { facility: "Arena Ajedrez", title: "Juego", category: "GENERAL", referee: "Carla Emily" },
-      { facility: "Arena Petanca", title: "Juego", category: "GENERAL", referee: "Marcos" },
-      { facility: "Cross", title: "Carrera", category: "GENERAL", referee: "Iker quesada" }
-    ]
-  },
-  { time: "12:50 - 12:55", events: [
-      { facility: "Arena Ajedrez", title: "Juego", category: "CAD FEM", referee: "Mendieta" },
-      { facility: "Arena Petanca", title: "Juego", category: "CAD FEM", referee: "Bruno" },
-      { facility: "Cross", title: "Carrera", category: "CAD FEM" }
-    ]
-  },
-  { time: "13:00 - 13:10", events: [
-      { facility: "Campo Grande", title: "SB - MC", category: "PARTIDO", referee: "Gael Gutierrez" },
-      { facility: "Cross", title: "Carrera", category: "GENERAL", referee: "Samuel Gutierrez" }
-    ]
-  },
-  { time: "13:10 - 13:15", events: [
-      { facility: "Campo Grande", title: "MC - SF", category: "PARTIDO" },
-      { facility: "Pádel", title: "MC - SF", category: "PARTIDO" },
-      { facility: "Cross", title: "Carrera", category: "GENERAL", referee: "Triana" }
-    ]
-  },
-  { time: "13:20 - 13:30", events: [
-      { facility: "Campo Grande", title: "SF - SB", category: "PARTIDO", referee: "Mendieta" },
-      { facility: "Campo Pequeño", title: "SB - MC", category: "PARTIDO", referee: "Adrian" },
-      { facility: "Gimnasio", title: "MC - SF", category: "PARTIDO" }
-    ]
-  },
-  { time: "13:30 - 13:35", events: [
-      { facility: "Piscina", title: "Relevos", category: "INFANTIL", referee: "Lucia Fernandez / Melania / Clara" },
-      { facility: "Pádel", title: "SF - SB", category: "PARTIDO", referee: "Ruben Sanz" }
-    ]
-  },
-  { time: "13:40 - 13:50", events: [
-      { facility: "Campo Grande", title: "MC - SF", category: "PARTIDO", referee: "Santiago gascon" },
-      { facility: "Campo Pequeño", title: "SF - SB", category: "PARTIDO", referee: "Iker quesada" },
-      { facility: "Gimnasio", title: "SF - SB", category: "PARTIDO", referee: "Miguel y Gael" },
-      { facility: "Piscina", title: "Relevos", category: "CADETE", referee: "Aaron" }
-    ]
-  },
-  { time: "13:50 - 13:55", events: [
-      { facility: "Pádel", title: "SB - MC", category: "PARTIDO", referee: "Adrian / Daniel" }
-    ]
-  },
-  { time: "14:00 - 14:10", events: [
-      { facility: "Campo Grande", title: "SB - MC", category: "PARTIDO", referee: "Marcos Serrano" },
-      { facility: "Campo Pequeño", title: "MC - SF", category: "PARTIDO", referee: "Bruno" },
-      { facility: "Gimnasio", title: "MC - SB", category: "PARTIDO", referee: "Lucia / Monica / Elsa" },
-      { facility: "Piscina", title: "Libre", category: "GENERAL", referee: "Sara Pellicer" }
-    ]
-  },
-  { time: "14:20 - 14:30", events: [
-      { facility: "Campo Grande", title: "SB - MC", category: "PARTIDO", referee: "Santiago Gascon" },
-      { facility: "Campo Pequeño", title: "SB - MC", category: "PARTIDO", referee: "Iker quesada" },
-      { facility: "Gimnasio", title: "SB - MC", category: "PARTIDO", referee: "Miguel y Gael" },
-      { facility: "Piscina", title: "SB - SF", category: "PARTIDO", referee: "Hugo Naranjo" },
-      { facility: "Pádel", title: "SB - MC", category: "PARTIDO", referee: "Gonzalo / Edu" },
-      { facility: "Arena Ajedrez", title: "SB - MC", category: "PARTIDO", referee: "Marcos Incze" }
-    ]
-  },
-  { time: "14:30 - 14:40", events: [
-      { facility: "Campo Grande", title: "SB - SF", category: "PARTIDO", referee: "Gael Gutierrez" },
-      { facility: "Campo Pequeño", title: "SB - SF", category: "PARTIDO", referee: "Sebastián" },
-      { facility: "Gimnasio", title: "SB - SF", category: "PARTIDO", referee: "Mónica / Candela" },
-      { facility: "Piscina", title: "SB - SF", category: "PARTIDO", referee: "Aaron" }
-    ]
-  },
-  { time: "14:40 - 14:50", events: [
-      { facility: "Campo Grande", title: "SF - MC", category: "PARTIDO", referee: "Reppeto" },
-      { facility: "Campo Pequeño", title: "SF - MC", category: "PARTIDO", referee: "Luis" },
-      { facility: "Gimnasio", title: "SF - MC", category: "PARTIDO", referee: "Adrian" },
-      { facility: "Piscina", title: "SF - MC", category: "PARTIDO", referee: "Kevin" }
-    ]
-  },
-  { time: "14:50 - 15:00", events: [
-      { facility: "Campo Grande", title: "Entrega de Trofeos y Clausura", category: "GENERAL", referee: "Organización" }
-    ]
-  }
-];
+// --- COMPRESIÓN DE HORARIOS Y ASIGNACIÓN EXHAUSTIVA DE CATEGORÍAS SEGÚN EL PDF ---
+const SCHED_RAW = "10:20 - 10:30^Campo Grande|SB - SF|INF MAS|Marcos Serrano^Campo Pequeño|SB - MC|INF MAS|Bruno^Piscina|50m (series)|INF MAS|Hugo Naranjo / Yago / Daniela^Pádel|MC - SF|INF MAS|Gonzalo / Edu^Cross|Carrera|INF MAS|Lavinia~10:30 - 10:40^Arena Ajedrez|Libre para recreos|INF FEM|~10:45 - 10:50^Campo Grande|MC - SF|ALEV MAS|Reppeto^Campo Pequeño|SF - SB|ALEV MAS|Luis^Piscina|50m (series)|ALEV MAS|Hugo Naranjo / Yago / Daniela^Pádel|SF - SB|ALEV MAS|Gonzalo / Edu^Arena Ajedrez|Libre para recreos|ALEV MAS|~10:50 - 11:05^Arena Ajedrez|Libre para recreos|ALEV FEM|^Arena Petanca|Juego|INF FEM|^Cross|Carrera|ALEV FEM|~11:05 - 11:10^Piscina|50m|BENJ MAS|^Pádel|SB - MC|BENJ MAS|^Arena Ajedrez|Libre para recreos|BENJ MAS|^Cross|Carrera|BENJ MAS|Irene Perez~11:10 - 11:20^Campo Grande|SB - MC|BENJ FEM|Aaron^Campo Pequeño|MC - SF|BENJ FEM|Sebastián^Arena Ajedrez|Libre para recreos|BENJ FEM|^Cross|Carrera|BENJ FEM|Del Cerro~11:20 - 11:30^Gimnasio|MC - SF|ALEV MAS|^Arena Ajedrez|Libre para recreos|ALEV MAS|^Arena Petanca|Juego|ALEV MAS|~11:30 - 11:40^Piscina|Relevos|ALEVIN|^Pádel|SF - SB|ALEVIN|Gonzalo / Edu~11:40 - 11:50^Campo Grande|SB - MC|CAD MAS|Marcos^Campo Pequeño|SB - MC|CAD MAS|Bruno^Gimnasio|SF - SB|CAD MAS|Lucia / Monica / Elsa^Piscina|200m (hasta :55)|CAD MAS|Hugo Naranjo / Yago / Daniela^Arena Ajedrez|Juego|CAD MAS|Briongos^Arena Petanca|Juego|CAD MAS|Samuel Diaz~11:50 - 12:00^Cross|Carrera|ALEV FEM|~12:00 - 12:10^Gimnasio|MC - SB|CADETE|Lucia / Monica / Elsa^Pádel|SF - SB|CADETE|Adrian / Daniel^Arena Ajedrez|Juego|GENERAL|Miguel^Arena Petanca|Juego|GENERAL|Hugo Camino^Cross|Carrera|GENERAL|Nicolas Gomez~12:10 - 12:20^Piscina|200 M (hasta :25)|COMPETICIÓN|Sara Pellicer / Kevin / Angel Marmol^Cross|Carrera|GENERAL|Yang~12:20 - 12:30^Campo Grande|MC - SF|CAD MAS|Ruben Sanz~12:30 - 12:35^Campo Pequeño|SB - MC|CAD FEM|Mónica / Candela / Marina^Piscina|200 M (hasta :40)|COMPETICIÓN|Adrian / Daniel^Pádel|SF - SB|CADETE|Adrian / Daniel^Arena Ajedrez|Juego|CADETE|Marcos Incze^Arena Petanca|Juego|CADETE|reppeto^Cross|Carrera|CADETE|Sergio Ortez~12:40 - 12:50^Campo Grande|SF - SB|CAD MAS|Santiago Gascon^Piscina|200 M|CADETE|Sara Pellicer / Kevin / Angel Marmol^Arena Ajedrez|Juego|GENERAL|Carla Emily^Arena Petanca|Juego|GENERAL|Marcos^Cross|Carrera|GENERAL|Iker quesada~12:50 - 12:55^Arena Ajedrez|Juego|CAD FEM|Mendieta^Arena Petanca|Juego|CAD FEM|Bruno^Cross|Carrera|CAD FEM|~13:00 - 13:10^Campo Grande|SB - MC|CAD MAS|Gael Gutierrez^Cross|Carrera|GENERAL|Samuel Gutierrez~13:10 - 13:15^Campo Grande|MC - SF|CAD FEM|^Pádel|MC - SF|INFANTIL|^Cross|Carrera|GENERAL|Triana~13:20 - 13:30^Campo Grande|SF - SB|CAD MAS|Mendieta^Campo Pequeño|SB - MC|CAD FEM|Adrian^Gimnasio|MC - SF|INFANTIL|~13:30 - 13:35^Piscina|Relevos|INFANTIL|Lucia Fernandez / Melania / Clara^Pádel|SF - SB|INFANTIL|Ruben Sanz~13:40 - 13:50^Campo Grande|MC - SF|CAD MAS|Santiago gascon^Campo Pequeño|SF - SB|CAD FEM|Iker quesada^Gimnasio|SF - SB|INFANTIL|Miguel y Gael^Piscina|Relevos|CADETE|Aaron~13:50 - 13:55^Pádel|SB - MC|INFANTIL|Adrian / Daniel~14:00 - 14:10^Campo Grande|SB - MC|INF MAS|Marcos Serrano^Campo Pequeño|MC - SF|INF FEM|Bruno^Gimnasio|MC - SB|CAD MAS|Lucia / Monica / Elsa^Piscina|Libre|GENERAL|Sara Pellicer~14:20 - 14:30^Campo Grande|SB - MC|INF MAS|Santiago Gascon^Campo Pequeño|SB - MC|INF FEM|Iker quesada^Gimnasio|SB - MC|CAD MAS|Miguel y Gael^Piscina|SB - SF|ALEVIN|Hugo Naranjo^Pádel|SB - MC|ALEVIN|Gonzalo / Edu^Arena Ajedrez|SB - MC|ALEVIN|Marcos Incze~14:30 - 14:40^Campo Grande|SB - SF|INF MAS|Gael Gutierrez^Campo Pequeño|SB - SF|INF FEM|Sebastián^Gimnasio|SB - SF|CAD MAS|Mónica / Candela^Piscina|SB - SF|ALEVIN|Aaron~14:40 - 14:50^Campo Grande|SF - MC|INF MAS|Reppeto^Campo Pequeño|SF - MC|INF FEM|Luis^Gimnasio|SF - MC|CAD MAS|Adrian^Piscina|SF - MC|INFANTIL|Kevin~14:50 - 15:00^Campo Grande|Entrega de Trofeos y Clausura|GENERAL|Organización";
 
-// --- SISTEMA DE COMPRESIÓN DE DATOS PARA EVITAR LÍMITES DE MEMORIA ---
-const expand = (sport, data) => {
-  const res = [];
-  for (const school in data) {
-    for (const category in data[school]) {
-      data[school][category].split(',').forEach(name => {
-        if(name.trim()) res.push({ sport, school, category, name: name.trim(), id: `${sport}-${school}-${Math.random().toString(36).substr(2, 6)}` });
-      });
-    }
-  }
-  return res;
+const buildSchedule = () => SCHED_RAW.split('~').map(slotStr => {
+  const [time, ...eventsStr] = slotStr.split('^');
+  const events = eventsStr.map(e => {
+     const [facility, title, category, referee] = e.split('|');
+     return { facility, title, category, referee: referee || '' };
+  });
+  return { time, events };
+});
+
+const INITIAL_SCHEDULE = buildSchedule();
+
+// --- SISTEMA DE COMPRESIÓN EXTREMA DE DATOS PARA PARTICIPANTES ---
+// Reemplazando saltos de línea con estructuras delimitadas.
+const RAW_DATABASE = {
+  'Pádel': 'SB|ALE MASC:Juandi,Pablo Gallego|ALE FEM:Emma,Sara,Nerea|INF MAS:Angel Muñoz 1c,Hector 2a|CAD MAS:camacho / adrian,Felix 3b / Pablo 3b|CAD FEM:marta / ainhoa,aitana / daniela,diego rueda / Adrian,Carla_SF|ALE MASC:Pablo,Sergio|ALE FEM:Valeria,Daniela|INF MAS:Mario,Ian|INF FEM:Raquel,Valentina|CAD MAS:Hugo,Iker|CAD FEM:Angela,Daniela_MC|ALE MASC:Edgar,Olmo|ALE FEM:Ainhoa,Erika|CAD MAS:Arturo,Ruben,Avacom|CAD FEM:Maria Elena,Andrea,Carmen',
+  'Voleibol': 'SB|INF:Paula Contera 1c,Irene Rivera 1c,Lucas Cabrera 1c,Ariadna Infantes 2a,Iwola 2a,Alvaro Ariza 2a,Ainhoa 1b,Martrin 2c|CAD:Roa 3d,Kevin,victoria 3c,Adrian,eva 3c,Nerea,Orlando 3b,Pablo 3b,Esther,Delfina,ainhara 3a,Elena Lahoz 3a,Sara del olmo 3a,Zaira,Lucia Lopez,Bea,Alba Lopez 4a,Andrea 4a,Irene Sobreviela 4a_SF|INF:Sofia,Alejandro,Rebeca,Isabela,Sara,Lucia,Olalla,Michael,Paula,Alya,Alba,Prisco,Manuel,Claudia,Izan|CAD:Izan,Kayque,Mayeline,Gabriela,Lucia,Jesus,Yamile,Jessica,Paula,Diego,Carla,Isabela,Lucia,Jorge,Dennis,Iker,Elys,Karam_MC|INF:Dani,Axcel,Janna,Jonal,Juan Pablo,Elvis,Daria,Violeta,Nuria,Claudia|CAD:Pilar,Andrei,Ines,Lucia,Valentina,Mostafa,Elena,Dina,Kenny,Juan Carlos,Yassir',
+  'Baloncesto': 'SB|ALE MASC:Daniel G,Quique,Luis,Moussa,Paulo,Anthony,Eliel,Gabriel|ALE FEM:Maira,Valentina,Carla O.,Ana C.,Julia R.,Carla S.,Susana,Samira|INF MAS:Sammy Andres 1c,Oliver 2B,Dilan Gael 1c,Amores 1c,Carlos Moises 1b,Daniel marius 2c|INF FEM:Estrella Muzo 1c,Elena Perez 2a,Almudena 2a,Nayara 2c|CAD MAS:Franly 3d,Sebas 3a,Culebras 3b,adrian 3a,Diego 3a|CAD FEM:Lucia Baeza 3c,Maria Baeza 3b,Carla 3a,Irene Sanjuan 3a,Bea 4a_SF|ALE MASC:Joseph,Zeus,Daniel,Luca,Aitor,Victor,Juan Felipe,Zakaria,Diego|ALE FEM:Nahiara,Inés,Lucía,Erika,Sara|INF MAS:Neizan,Carlos,Mario,Ali,Hector,Javier,Gonzalo,Alejandro,Jayden|CAD MAS:Diego,Elys,Izan,Lucas,Samuel|CAD FEM:Sofia,María,Daniela,Claudia_MC|INF MAS:David,Ruben,Luis Ángel,Pablo|ALE MASC:Jose Luis,Guillermo,Saber,Olmo|ALE FEM:Nilde,Natalia,Iratxe|CAD MAS:Omar,Arturo,Juan Carlos',
+  'Petanca': 'SB|ALE MASC:Daniela,Pablo,Elena,Yuxi,Quique,Lorenzo,Aldara,Cristina,Antonio,Emma,Uriel,Gabriel,Samara,Moreta,Sebas,Carmen,AITANA GUAMAN,YAIZA DE LA CAL,SARA JAREÑO,ARTURO ARRIBAS,PEDRO PRIOR,CARLOS CARBALLO,MANUELA ESTEBAN,EVA CAMACHO,MARÍA CUESTA|INF MAS:Noa 2b,Patricia 2b,Julia 1b,Fernanda 1b,Marcos Perez 1c,Lynet Terrero 1c,Dylan 2a,Elena Perez 2a,Cesar 2a,Almudena 2a,Stere 2a,Jorge 2c,Annabeth 2c,Sofía Spolosino 1a,Victoria Peruga 1a|CAD MAS:Hector Sanchidrian,Preda 3c,Silvia Florentin 3c,Jose 3c,Lucia Conejo 3a,Lucia Martin 3a,Lucia Lopez 3a,Sara Garcia 3a,Maria Garcia 3a,Partricia Pintilie 3a,Olimpia 4a,Pilar 4a,Luna 4a,Azucena 4a,Gadea 4a,Sara 4a,Daniela q 4a,Carlota 4a,Marta 4a,Irene sobreviela_SF|ALE MASC:Nahiara,Raquel,Ismael,Alyss,Vicor,Celia,Olivia,Sergio,Claudia,Alisson,Cristofer,Diego,Juan,Manuela,Pablo,Valeria,Sara,Sheyla,Mariana,Ariadna,Oliver,Luca|INF MAS:Natalia,Sofia,Manuel,Alexia,Pablo|CAD MAS:Roberto,Isabela,Lucia,Maria,Daniela,Sofia,Ana,Yamile,Lucas,Jimena_MC|GENERAL:Hugo,Mario,Marcos',
+  'Ajedrez': 'SB|ALE:MOUSSA MBENGUE,IAGO VILLEGAS,FABIO LOPEZ,SAMUEL DIAZ,LAURA GONZALES,MIRANDA RODRIGUEZ,ANAIS TURBATU,DRAKE MENDOZA,ZECHUAN,IÑAKI RUIZ,SHANTAL RODRIGUEZ,LUZ MARQUEZ,Lorenzo,Pablo,Quique,Facundo,Antonio,Santi,Miguel,Gabriel|INF:Arturo Dominguez 1c,Marcos Perez 1c,Claudia 1c,Dylan 2a,Celia Mendez 2a,Leo de las Heras 1b,Leo Lahoz 1b,Pedro Peruga 1b,Morena 2c,Rivera 2c|CAD:Hanyu 3d,Felix Gonzalez 3b,Irene perez 4a,Maria Lara 4b,Alvaro Martin 4b,Sofia arenillas 4b,Natalia Gallego 4b_SF|ALE:Roberto,Samuel,Javier,Zeus,Fayz,Marco,Nicolás,Juan,Marcelo,Aitor,Saúl,Diego,Dylan,Lucia|INF:Izan,Gabriel,Hugo,Alejandro,Valentina,Mario,Aleksander,Héctor,David|CAD:Marcos,Hugo,Miguel_MC|ALE:Mateo,Jaime,Edgar,Saber|INF:Jonal,Juan Pablo,Elvis,Sasha,Elsa|CAD:Rabab,Mostafa,Alonso',
+  'Fútbol': 'SB|BENJ MASC:Mario,Juanse,Alex,Dani,Hugo,Marcos|BENJ FEM:Camila,Sara Bullido,Carmen,Alba,Jade,Vega|ALE MASC:Rodrigo,Javi,Iván,Félix,Derek,DANI,RUBÉN,SALVA,ALEX R,ALEJANDRO B.,ALEX L,SAMUEL|ALE FEM:Daniela,Nagore,Sara R,Sara C,Yma,Catalina,Fabi,Irina,Emma H.,Valle,MJose,Alma,Emma B.|INF MAS:Dani de Leon 1c,Adrian Ramos 1c,Nacho (2a,Iago (2a,Raul del Pino 1b,Carmelo 1b,Alonso (2c,Aday (2c,Raul Muñoz 1a,Adrián Maroto 1a,luca 2b,diego j 2b|INF FEM:Yara Grados 1c,Lynet 1c,Adela (2a,Maria (2a,Candela 2c,Elena 2c,aitana 2b,amaya 2b|CAD MAS:Ruben Perez 3d,Castaño3d,Kevin 3d,Potosi 3b,Culebras 3b,Nacho 3a,Ivan 3a,Alexis3a,Izan(3a,sebastian 4a,cava 4b,gallego 4b,alecsis4c,Gualan 4c|CAD FEM:Silvia Florentin 3c,Laura Moreno 3b,nerea Granados 3b,Irene San Juan 3a,Sofia,Carla 3a,Carlota Vazquez 4c,Ainhoa Sainz 4c,Navarro (4d_SF|ALE MASC:Mateo,Hamza,Hugo,Marco,Javier,Gabriel,Rubén,Iván,Alejandro,Leo,Oliver,Marco,Saúl,Oliver|ALE FEM:Daniela,Eva,Carla,Carlota,Gabriela,Noelia,Mariana,Marwa|INF MAS:Fabián,Hector,Pablo,Ali,Mario,Raúl,Ian,Oliver,Gonzalo,Jayden|CAD MAS:Óliver,Álvaro,Matías,Alejandro,Jorge,Jose,Elys,Iker,Karam,Dennis,Lucas,Abel,Hugo,Mateo,Saul,Alejandro,Izan,Albar,Kayque,Oswaldo|CAD FEM:Daniela,Jessica,Angela,Inas,Yaiza_MC|BENJ MASC:Thiago,Enzo,Martin,Allan,Oleksander,Zhair,Aaron,Adrian,Pablo,Mateo|BENJ FEM:Antonella,Ada,Eden,Olivia,Roaya,Covadonga,Beatriz|ALE MASC:Hugo,Marcus,Mario,Jaime,Edgar,Guillermo,Ayman,Brandon,Olmo|ALE FEM:Maria,Manar,Alysa,Sofia,Erika,Ainhoa,Nilde,Yasmina,Natalia,Fabiana,Iratxe|INF MAS:Axcel,Nicu,Darius,Kevin,Santiago,Ruben,Daniel,Pablo,Angel,Elvis,Manuel|INF FEM:Claudia,Nuria,Elsa,Violeta,Sasha,Natalia,Daria|CAD MAS:Rodrigo,Yanis,Mario,Avacom,Denis,Jean Paul,Mostafa,Yassir,Juan Miguel,Hugo,Andrei|CAD FEM:Aslhy,Maroua,Mariam,Carmen,Andrea,Diana,Elena,Ana Isabel,Dina,Mara',
+  'Natación': 'SB|ALE MASC:Ángel (e),Santi (equipo)|ALE FEM:ELSA GONZALEZ (e),EVA BAGIU,PAULA R.,ADRIANA C.,Aldara,Naza,Elena,Lía,Sofía (e),Bea|INF MAS:Gabriel Ogando 1b,Pablo Granados 1b,Cristian Mamani 1b,Capello 2a,Alvaro Gallego 2a,Ignacio Escobar 2a,Pelayo 2c,Michel 2c|INF FEM:Carla 1b,Amanda 1b,Alejandra Alonso 1a,Irene Rubio 1b,Marian Estrada 1a,Sara sanchez 1a,Martina 1a,maria escobar 2b,Alba 2c,Villegas (2C)|CAD MAS:David (4a,camacho 3c,hugo 4b,antonio 3a,fran 4b,dani (4b),Jose (4c)|CAD FEM:eva bursuc 3c,miriam 3c,Laura Moreno 3b,sara davi 3a,maria3a,sara 3a,Paula (4a,ruth (4a,Sofía Rodriguez 4c_SF|ALE MASC:Marco|ALE FEM:Sofía,Inés,Leire,Valeria,Manuela,Alyss,Adriana|INF MAS:Neizan,Michael,Ali,Javier,Carlos|INF FEM:Raquel,Natalia,Sofia,Mª Milagros,Emma,Alexia,Rebeca,Olalla|CAD MAS:Adrián,Karam,Dennis|CAD FEM:Noemi,Gemma,Ana,Sofia,Maria,Gabriela,Lucia,Mayeline_MC|ALE MASC:Guillermo,Olmo|ALE FEM:Sofia,Yasmina|INF MAS:Juan Pablo|INF FEM:Hassna|CAD MAS:Samuel,Alonso,Andrei,Ruben|CAD FEM:Rabab,Irene',
+  'Cross': 'SB|ALE MASC:Antonio,Raúl,Daniel Gª,Nico,Marcos,Gerson,Eric,Juandi,MOUSSA MBENGUE,ENRIQUE MUÑOZ,PABLO PEREZ,IAGO VILLEGAS,LEO MENDIETA,DANIEL MORENO,ALEJANDRO BRICEÑO,GONZALO ABAJO,SANTIAGO VIDAL,ALEJANDRO RODRIGUEZ,Martín|ALE FEM:NICOLE SOTO,TERESA VIDAL,Yuxi,Sara R.,Cristina,Daniela,Amaya,Valentina,Irina,Fabi,Sara C,MARTINA HERNANZ,EVA BAGIU,ALMA VILLA,SUSANA FERNANDEZ,Catalina|INF MAS:Lingres 1B,Lukas 1B,Dylan 1B,Victor Danca 1A,Angel Muñoz 1C,Abel Lopez 1A,Alvaro Gallego 2A,Carlos Mathias 2A,Iago 2A,Michel Cherkai 2C,Dario 2C,Jesus Asiel 2C,Diego Gonzalez|INF FEM:Gema 1B,Sofía 1B,Sara 2B,1a,Irene contreras 1C,Estefanía Vazquez 1C,Adela 2A,Celia 2A,Alicia 2C,Iria 2C|CAD MAS:Castaño 3D,Alexis 3A,Sebastian 4A,Cava 4B,Gualan 4C,Alecsis 4C|CAD FEM:Irene Zapete 3D,Laura Baeza,Irene Perez 4A,Elena Lahoz 3A,Aitana 4A,Marta 4,Luna 4A,Gadea 4A,Pilar 4A,Carlota Vazquez 4C_SF|ALE MASC:Leo,Ismael,Daniel,Mateo,Hamza,Hugo,Zakaria,Marco,Luca,Aitor,Saúl,Oliver|ALE FEM:Valeria,Daniela,Eva,Raquel,Alisson,Olivia,Valeria 2,Sara,Noelia,Lucía,Erika,Abigail,Daniela 2,Claudia,Celia,Ariana|INF MAS:Michael,Ali,Alejandro,Carlos,Mario,Gonzalo,Alejandro 2|INF FEM:Mª Milagros,Sofia,Valentina,Alba,Alya,Emma,Alexia,Iciar,Isabela,Sara,Sofia 2|CAD MAS:Diego,Marcos,Izan|CAD FEM:Ashley,Inas,Daniela,María,Sofia,Noelia_MC|ALE MASC:Jose Luis,Jaime,Brandon,Hugo,Ayman,Mario,Marcus|ALE FEM:Nilde,Natalia,Iratxe,Maria,Fabianna,Manar,Khaoula|INF MAS:Florin,Kevin,Santiago,Daniel,Nicu,Axcel|INF FEM:Natalia,Daria,Violeta|CAD MAS:Mostafa,Erik|CAD FEM:Aslhy,Mariam,Lucia,Andrea,Carmen,Valentina'
 };
 
-const INITIAL_PARTICIPANTS = [
-  ...expand('Pádel', {
-    SB: { 'ALE MASC': 'Juandi,Pablo Gallego', 'ALE FEM': 'Emma ó Sara,Nerea', 'INF MAS': 'Angel Muñoz 1c,Hector 2a', 'CAD MAS': 'camacho / adrian,Felix 3b / Pablo 3b', 'CAD FEM': 'marta / ainhoa,aitana / daniela,diego rueda / Adrian,Carla' },
-    SF: { 'ALE MASC': 'Pablo,Sergio', 'ALE FEM': 'Valeria,Daniela', 'INF MAS': 'Mario,Ian', 'INF FEM': 'Raquel,Valentina', 'CAD MAS': 'Hugo,Iker', 'CAD FEM': 'Angela,Daniela' },
-    MC: { 'ALE MASC': 'Edgar,Olmo', 'ALE FEM': 'Ainhoa,Erika', 'CAD MAS': 'Arturo,Ruben,Avacom', 'CAD FEM': 'Maria Elena,Andrea,Carmen' }
-  }),
-  ...expand('Voleibol', {
-    SB: { 'INF': 'Paula Contera 1c,Irene Rivera 1c,Lucas Cabrera 1c,Ariadna Infantes 2a,Iwola 2a,Alvaro Ariza 2a,Ainhoa 1b,Martrin 2c', 'CAD': 'Roa 3d,Kevin,victoria 3c,Adrian,eva 3c,Nerea,Orlando 3b,Pablo 3b,Esther,Delfina,ainhara 3a,Elena Lahoz 3a,Sara del olmo 3a,Zaira,Lucia Lopez,Bea,Alba Lopez 4a,Andrea 4a,Irene Sobreviela 4a' },
-    SF: { 'INF': 'Sofia,Alejandro,Rebeca,Isabela,Sara,Lucia,Olalla,Michael,Paula,Alya,Alba,Prisco,Manuel,Claudia,Izan', 'CAD': 'Izan,Kayque,Mayeline,Gabriela,Lucia,Jesus,Yamile,Jessica,Paula,Diego,Carla,Isabela,Lucia,Jorge,Dennis,Iker,Elys,Karam' },
-    MC: { 'INF': 'Dani,Axcel,Janna,Jonal,Juan Pablo,Elvis,Daria,Violeta,Nuria,Claudia', 'CAD': 'Pilar,Andrei,Ines,Lucia,Valentina,Mostafa,Elena,Dina,Kenny,Juan Carlos,Yassir' }
-  }),
-  ...expand('Baloncesto', {
-    SB: { 'ALE MASC': 'Daniel G,Quique,Luis,Moussa,Paulo,Anthony,Eliel,Gabriel', 'ALE FEM': 'Maira,Valentina,Carla O.,Ana C.,Julia R.,Carla S.,Susana,Samira', 'INF MAS': 'Sammy Andres 1c,Oliver 2B,Dilan Gael 1c,Amores 1c,Carlos Moises 1b,Daniel marius 2c', 'INF FEM': 'Estrella Muzo 1c,Elena Perez 2a,Almudena 2a,Nayara 2c', 'CAD MAS': 'Franly 3d,Sebas 3a,Culebras 3b,adrian 3a,Diego 3a', 'CAD FEM': 'Lucia Baeza 3c,Maria Baeza 3b,Carla 3a,Irene Sanjuan 3a,Bea 4a' },
-    SF: { 'ALE MASC': 'Joseph,Zeus,Daniel,Luca,Aitor,Victor,Juan Felipe,Zakaria,Diego', 'ALE FEM': 'Nahiara,Inés,Lucía,Erika,Sara', 'INF MAS': 'Neizan,Carlos,Mario,Ali,Hector,Javier,Gonzalo,Alejandro,Jayden', 'CAD MAS': 'Diego,Elys,Izan,Lucas,Samuel', 'CAD FEM': 'Sofia,María,Daniela,Claudia' },
-    MC: { 'INF MAS': 'David,Ruben,Luis Ángel,Pablo', 'ALE MASC': 'Jose Luis,Guillermo,Saber,Olmo', 'ALE FEM': 'Nilde,Natalia,Iratxe', 'CAD MAS': 'Omar,Arturo,Juan Carlos' }
-  }),
-  ...expand('Petanca', {
-    SB: { 'ALE MASC': 'Daniela,Pablo,Elena,Yuxi,Quique,Lorenzo,Aldara,Cristina,Antonio,Emma,Uriel,Gabriel,Samara,Moreta,Sebas,Carmen,AITANA GUAMAN,YAIZA DE LA CAL,SARA JAREÑO,ARTURO ARRIBAS,PEDRO PRIOR,CARLOS CARBALLO,MANUELA ESTEBAN,EVA CAMACHO,MARÍA CUESTA', 'INF MAS': 'Noa 2b,Patricia 2b,Julia 1b,Fernanda 1b,Marcos Perez 1c,Lynet Terrero 1c,Dylan 2a,Elena Perez 2a,Cesar 2a,Almudena 2a,Stere 2a,Jorge 2c,Annabeth 2c,Sofía Spolosino 1a,Victoria Peruga 1a', 'CAD MAS': 'Preda 3c,Silvia Florentin 3c,Jose 3c,Lucia Conejo 3a,Lucia Martin 3a,Lucia Lopez 3a,Sara Garcia 3a,Maria Garcia 3a,Partricia Pintilie 3a,Olimpia 4a,Pilar 4a,Luna 4a,Azucena 4a,Gadea 4a,Sara 4a,Daniela q 4a,Carlota 4a,Marta 4a,Irene sobreviela' },
-    SF: { 'ALE MASC': 'Nahiara,Raquel,Ismael,Alyss,Vicor,Celia,Olivia,Sergio,Claudia,Alisson,Cristofer,Diego,Juan,Manuela,Pablo,Valeria,Sara,Sheyla,Mariana,Ariadna,Oliver,Luca', 'INF MAS': 'Natalia,Sofia,Manuel,Alexia,Pablo', 'CAD MAS': 'Roberto,Isabela,Lucia,Maria,Daniela,Sofia,Ana,Yamile,Lucas,Jimena' }
-  }),
-  ...expand('Ajedrez', {
-    SB: { 'ALE': 'MOUSSA MBENGUE,IAGO VILLEGAS,FABIO LOPEZ,SAMUEL DIAZ,LAURA GONZALES,MIRANDA RODRIGUEZ,ANAIS TURBATU,DRAKE MENDOZA,ZECHUAN,IÑAKI RUIZ,SHANTAL RODRIGUEZ,LUZ MARQUEZ,Lorenzo,Pablo,Quique,Facundo,Antonio,Santi,Miguel,Gabriel', 'INF': 'Arturo Dominguez 1c,Marcos Perez 1c,Claudia 1c,Dylan 2a,Celia Mendez 2a,Leo de las Heras,Leo Lahoz,Pedro Peruga,Morena,Rivera', 'CAD': 'Hanyu 3d,Felix Gonzalez 3b,Irene perez 4a,Maria Lara 4b,Alvaro Martin 4b,Sofia arenillas 4b,Natalia Gallego' },
-    SF: { 'ALE': 'Roberto,Samuel,Javier,Zeus,Fayz,Marco,Nicolás,Juan,Marcelo,Aitor,Saúl,Diego,Dylan,Lucia', 'INF': 'Izan,Gabriel,Hugo,Alejandro,Valentina,Mario,Aleksander,Héctor,David', 'CAD': 'Marcos,Hugo,Miguel' }
-  }),
-  ...expand('Fútbol', {
-    SB: { 'BENJ MASC': 'Mario,Juanse,Alex,Dani,Hugo,Marcos', 'BENJ FEM': 'Camila,Sara Bullido,Carmen,Alba,Jade,Vega', 'ALE MASC': 'Rodrigo,Javi,Iván,Félix,Derek,Pablo,Raúl,DANI,RUBÉN,SALVA,ALEX R,ALEJANDRO B.,ALEX L,SAMUEL', 'ALE FEM': 'Daniela,Nagore,Sara R,Sara C,Yma,Catalina,Fabi,Irina,Emma H.,Valle,MJose,Alma,Emma B.', 'INF MAS': 'Dani de Leon 1c,Adrian Ramos 1c,Nacho 2a,Iago 2a,Raul del Pino 1b,Carmelo 1b,Alonso 2c,Aday 2c,Raul Muñoz 1a,Adrián Maroto 1a', 'INF FEM': 'Yara Grados 1c,Lynet 1c,Adela 2a,Maria 2a,Candela 2c,Elena 2c,aitana 2b,amaya 2b', 'CAD MAS': 'Ruben Perez 3d,Castaño 3d,Kevin 3d,Potosi 3b,Culebras 3b,Nacho 3a,Ivan 3a,Alexis 3a,Izan 3a,sebastian 4a,cava 4b,gallego 4b,alecsis 4c,Gualan 4c,Navarro 4d', 'CAD FEM': 'Silvia Florentin 3c,Laura Moreno 3b,nerea Granados 3b,Irene San Juan 3a,Sofia,Carla 3a,Carlota Vazquez 4c,Ainhoa Sainz 4c' },
-    SF: { 'ALE MASC': 'Mateo,Hamza,Hugo,Marco,Javier,Gabriel,Rubén,Iván,Alejandro,Leo,Oliver,Saúl', 'ALE FEM': 'Daniela,Eva,Carla,Carlota,Gabriela,Noelia,Mariana,Marwa', 'INF MAS': 'Fabián,Hector,Pablo,Ali,Mario,Raúl,Ian,Oliver,Gonzalo,Jayden', 'CAD MAS': 'Óliver,Álvaro,Matías,Alejandro,Jorge,Jose,Elys,Iker,Karam,Dennis,Lucas,Abel,Hugo,Mateo', 'CAD FEM': 'Daniela,Jessica,Angela,Inas,Yaiza' }
-  }),
-  ...expand('Natación', {
-    SB: { 'ALE MASC': 'Ángel (e),Santi (equipo)', 'ALE FEM': 'ELSA GONZALEZ (e),EVA BAGIU,PAULA R.,ADRIANA C.,Aldara,Naza,Elena,Lía,Sofía (e),Bea', 'INF MAS': 'Gabriel Ogando 1b,Cristian Mamani 1b,Capello 2a,Ignacio Escobar 2a,Pelayo 2c,Pablo Granados 1b,Alvaro Gallego 2a,Michel 2c', 'INF FEM': 'Carla 1b,Alejandra Alonso 1a,Marian Estrada 1a,Martina 1a,Alba 2c,Amanda 1b,Irene Rubio 1b,Sara sanchez 1a,Villegas (2C)', 'CAD MAS': 'David 4a,hugo 4b,fran 4b,Jose 4c,camacho 3c,antonio 3a,dani 4b', 'CAD FEM': 'alba,miriam 3c,Laura Moreno 3b,maria 3a,Paula 4a,Sofía Rodriguez 4c,eva bursuc 3c,sara davi 3a,sara 3a,ruth 4a' },
-    SF: { 'ALE MASC': 'Marco', 'ALE FEM': 'Sofía,Inés,Leire,Valeria,Manuela,Alyss,Adriana', 'INF MAS': 'Neizan,Ali,Michael,Carlos,Javier', 'INF FEM': 'Raquel,Sofia,Mª Milagros,Emma,Natalia,Alexia', 'CAD MAS': 'Adrián,Karam,Dennis', 'CAD FEM': 'Noemi,Gemma,Sofia,Maria,Ana,Gabriela,Lucia' }
-  }),
-  ...expand('Cross', {
-    SB: { 'ALE MASC': 'Antonio,Raúl,Daniel Gª,Nico,Marcos,Gerson,Eric,Juandi,MOUSSA MBENGUE,ENRIQUE MUÑOZ,PABLO PEREZ,IAGO VILLEGAS,LEO MENDIETA,DANIEL MORENO,ALEJANDRO BRICEÑO,GONZALO ABAJO,SANTIAGO VIDAL,ALEJANDRO RODRIGUEZ,Martín', 'ALE FEM': 'NICOLE SOTO,TERESA VIDAL,Yuxi,Sara R.,Cristina,Daniela,Amaya,Valentina,Irina,Fabi,Sara C,MARTINA HERNANZ,EVA BAGIU,ALMA VILLA,SUSANA FERNANDEZ,Catalina', 'INF MAS': 'Lingres 1B,Lukas 1B,Dylan 1B,Victor Danca 1A,Angel Muñoz 1C,Abel Lopez 1A,Alvaro Gallego 2A,Carlos Mathias 2A,Iago 2A,Michel Cherkai 2C,Dario 2C,Jesus Asiel 2C,Diego Gonzalez', 'INF FEM': 'Gema 1B,Sofía 1B,Sara 2B,1a,Irene contreras 1C,Estefanía Vazquez 1C,Adela 2A,Celia 2A,Alicia 2C,Iria 2C', 'CAD MAS': 'Castaño 3D,Alexis 3A,Sebastian 4A,Cava 4B,Gualan 4C,Alecsis 4C', 'CAD FEM': 'Irene Zapete 3D,Laura Baeza,Irene Perez 4A,Elena Lahoz 3A,Aitana 4A,Marta 4,Luna 4A,Gadea 4A,Pilar 4A,Carlota Vazquez 4C' },
-    SF: { 'ALE MASC': 'Leo,Ismael,Daniel,Mateo,Hamza,Hugo,Zakaria,Marco,Luca,Aitor,Saúl,Oliver', 'ALE FEM': 'Valeria,Daniela,Eva', 'INF MAS': 'Michael,Ali,Alejandro', 'INF FEM': 'Mª Milagros,Sofia,Valent', 'CAD MAS': 'Diego,Marcos', 'CAD FEM': 'Ashley,Inas' },
-    MC: { 'ALE MASC': 'Jose Luis,Jaime,Brandon,Hugo,Ayman,Mario,Marcus' }
-  })
-];
+const buildParticipants = () => {
+  const result = [];
+  Object.entries(RAW_DATABASE).forEach(([sport, schoolsStr]) => {
+    schoolsStr.split('_').forEach(schoolBlock => {
+      const parts = schoolBlock.split('|');
+      const school = parts[0];
+      for (let i = 1; i < parts.length; i++) {
+        const [category, namesStr] = parts[i].split(':');
+        if(namesStr) {
+          namesStr.split(',').forEach(name => {
+            if (name.trim()) result.push({ sport, school, category, name: name.trim(), id: `${sport}-${school}-${Math.random().toString(36).substr(2, 6)}` });
+          });
+        }
+      }
+    });
+  });
+  return result;
+};
 
+const INITIAL_PARTICIPANTS = buildParticipants();
 const CORE_SPORTS = ['Pádel', 'Voleibol', 'Baloncesto', 'Petanca', 'Ajedrez', 'Fútbol', 'Natación', 'Cross'];
 
 export default function App() {
@@ -337,14 +155,14 @@ export default function App() {
   
   const [schedule, setSchedule] = useState(() => {
     try {
-      const saved = window.localStorage.getItem('intercentros_schedule_v13');
+      const saved = window.localStorage.getItem('intercentros_schedule_v32');
       return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
     } catch (e) { return INITIAL_SCHEDULE; }
   });
 
   const [participants, setParticipants] = useState(() => {
     try {
-      const saved = window.localStorage.getItem('intercentros_participants_v13');
+      const saved = window.localStorage.getItem('intercentros_participants_v32');
       return saved ? JSON.parse(saved) : INITIAL_PARTICIPANTS;
     } catch (e) { return INITIAL_PARTICIPANTS; }
   });
@@ -476,7 +294,7 @@ export default function App() {
 
       if (newSchedule.length > 0) {
          setSchedule(newSchedule);
-         window.localStorage.setItem('intercentros_schedule_v13', JSON.stringify(newSchedule));
+         window.localStorage.setItem('intercentros_schedule_v32', JSON.stringify(newSchedule));
       }
     } catch (err) {
       console.error(err);
@@ -572,7 +390,7 @@ export default function App() {
     }
     
     setParticipants(newParticipants);
-    window.localStorage.setItem('intercentros_participants_v13', JSON.stringify(newParticipants));
+    window.localStorage.setItem('intercentros_participants_v32', JSON.stringify(newParticipants));
     if (!silent) setSyncStatus('✅ ¡Sincronización Completa con el Excel!');
     setIsSyncing(false);
   };
@@ -708,12 +526,12 @@ export default function App() {
     if (editingItem.type === 'athlete') {
         const updated = participants.map(p => p.id === editingItem.data.id ? editingItem.data : p);
         setParticipants(updated);
-        window.localStorage.setItem('intercentros_participants_v13', JSON.stringify(updated));
+        window.localStorage.setItem('intercentros_participants_v32', JSON.stringify(updated));
     } else if (editingItem.type === 'match') {
         const updatedSchedule = [...schedule];
         updatedSchedule[editingItem.slotIndex].events[editingItem.eventIndex] = editingItem.data;
         setSchedule(updatedSchedule);
-        window.localStorage.setItem('intercentros_schedule_v13', JSON.stringify(updatedSchedule));
+        window.localStorage.setItem('intercentros_schedule_v32', JSON.stringify(updatedSchedule));
     }
     setEditingItem(null);
   };
@@ -782,17 +600,23 @@ export default function App() {
                <MapPin className="w-3.5 h-3.5 mr-1.5" /> Zonas de Juego
              </h5>
              <div className="grid grid-cols-1 gap-2">
-               {facilities.map(fac => (
-                 <div key={fac} className="bg-white border border-indigo-100/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center shadow-sm hover:shadow-md transition-shadow">
-                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg sm:text-xl mr-3 bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60`}>
-                     {FACILITIES[fac]?.icon}
+               {facilities.map(fac => {
+                 const facilityData = FACILITIES[fac];
+                 return (
+                   <div key={fac} className="bg-white border border-indigo-100/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center shadow-sm hover:shadow-md transition-shadow">
+                     <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg sm:text-xl mr-3 bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60`}>
+                       {facilityData?.icon}
+                     </div>
+                     <div>
+                       <p className="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest">Instalación</p>
+                       <p className="text-xs sm:text-sm font-black text-slate-700 leading-tight">{fac}</p>
+                       {facilityData?.defaultRef && (
+                          <p className="text-[9px] sm:text-[10px] font-bold text-indigo-500 mt-0.5">Resp: {facilityData.defaultRef}</p>
+                       )}
+                     </div>
                    </div>
-                   <div>
-                     <p className="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest">Instalación</p>
-                     <p className="text-xs sm:text-sm font-black text-slate-700 leading-tight">{fac}</p>
-                   </div>
-                 </div>
-               ))}
+                 );
+               })}
                {facilities.length === 0 && (
                  <p className="text-xs text-slate-500 italic">Asignación de zona pendiente.</p>
                )}
@@ -863,9 +687,9 @@ export default function App() {
               <div className="bg-blue-50 group-hover:bg-blue-500 text-blue-600 group-hover:text-white p-2.5 sm:p-3 rounded-xl sm:rounded-[16px] mb-2 sm:mb-3 transition-colors duration-300"><MapPin className="w-5 h-5 sm:w-6 sm:h-6" /></div>
               <span className="font-extrabold text-[9px] sm:text-xs text-slate-700 uppercase tracking-wider text-center leading-tight">Cómo<br className="sm:hidden"/> Llegar</span>
             </a>
-            <a href="https://drive.google.com/file/d/1yFsKClAlw8s6PxO3Bdi9SM9Ou-avxyce/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="bg-white rounded-[16px] sm:rounded-[24px] p-2.5 sm:p-5 flex flex-col items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_50px_rgba(99,102,241,0.15)] border border-slate-100/50 hover:border-indigo-300 transition-all duration-300 transform hover:-translate-y-1.5 group">
+            <a href="https://docs.google.com/spreadsheets/d/1u6UFrQeIGUpuBlJiz5OaPodwEEJZrOwYrlsDkNfBNSg/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="bg-white rounded-[16px] sm:rounded-[24px] p-2.5 sm:p-5 flex flex-col items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_50px_rgba(99,102,241,0.15)] border border-slate-100/50 hover:border-indigo-300 transition-all duration-300 transform hover:-translate-y-1.5 group">
               <div className="bg-indigo-50 group-hover:bg-indigo-500 text-indigo-600 group-hover:text-white p-2.5 sm:p-3 rounded-xl sm:rounded-[16px] mb-2 sm:mb-3 transition-colors duration-300"><FileText className="w-5 h-5 sm:w-6 sm:h-6" /></div>
-              <span className="font-extrabold text-[9px] sm:text-xs text-slate-700 uppercase tracking-wider text-center leading-tight">Horario<br className="sm:hidden"/> PDF</span>
+              <span className="font-extrabold text-[9px] sm:text-xs text-slate-700 uppercase tracking-wider text-center leading-tight">Horario<br className="sm:hidden"/> Nube</span>
             </a>
             <a href="https://drive.google.com/file/d/1NWvgAKL286hLw6AL3sP-V7MtobhUc2xf/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="bg-white rounded-[16px] sm:rounded-[24px] p-2.5 sm:p-5 flex flex-col items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_50px_rgba(99,102,241,0.15)] border border-slate-100/50 hover:border-indigo-300 transition-all duration-300 transform hover:-translate-y-1.5 group">
               <div className="bg-emerald-50 group-hover:bg-emerald-500 text-emerald-600 group-hover:text-white p-2.5 sm:p-3 rounded-xl sm:rounded-[16px] mb-2 sm:mb-3 transition-colors duration-300"><MapIcon className="w-5 h-5 sm:w-6 sm:h-6" /></div>
@@ -912,8 +736,8 @@ export default function App() {
 
             {/* SECCIÓN "LO QUE SE ESTÁ JUGANDO AHORA" */}
             {currentLiveSlot && (
-              <div className="mb-8 sm:mb-10 bg-gradient-to-br from-red-50/80 to-orange-50/80 border border-red-100 rounded-[24px] sm:rounded-[32px] pt-4 sm:pt-5 pb-5 sm:pb-6 shadow-[0_8px_30px_rgba(239,68,68,0.06)] relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-red-400/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3"></div>
+              <div className="mb-8 sm:mb-10 bg-gradient-to-br from-red-50/80 to-orange-50/80 border border-red-500 rounded-[24px] sm:rounded-[32px] pt-4 sm:pt-5 pb-5 sm:pb-6 shadow-[0_0_15px_rgba(239,68,68,0.6)] animate-pulse relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-red-400/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3"></div>
                 <div className="flex items-center justify-between mb-4 sm:mb-5 relative z-10 px-4 sm:px-6">
                   <h3 className="text-xs sm:text-sm font-black text-red-600 uppercase tracking-widest flex items-center">
                     <div className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3 mr-2 sm:mr-2.5">
@@ -922,7 +746,7 @@ export default function App() {
                     </div>
                     Jugando Ahora
                   </h3>
-                  <span className="bg-red-500 text-white px-3 py-1 rounded-xl text-[10px] sm:text-[11px] font-black shadow-sm tracking-wider">
+                  <span className="bg-red-600 text-white px-3 py-1 rounded-xl text-[10px] sm:text-[11px] font-black shadow-lg tracking-wider">
                     {currentLiveSlot.time}
                   </span>
                 </div>
@@ -931,9 +755,10 @@ export default function App() {
                   {currentLiveSlot.events.map((event, evtIndex) => {
                     const style = FACILITIES[event.facility] || { color: "bg-gray-100 text-gray-800 border-gray-200", icon: "📍" };
                     const matchObj = event.title.match(/^(SB|SF|MC)\s*-\s*(SB|SF|MC)$/);
+                    const defaultRef = FACILITIES[event.facility]?.defaultRef;
                     
                     return (
-                      <div key={evtIndex} className="snap-start shrink-0 w-[240px] sm:w-[280px] bg-white rounded-[20px] p-4 shadow-sm border border-red-100/50 hover:border-red-200 transition-colors relative">
+                      <div key={evtIndex} className="snap-start shrink-0 w-[240px] sm:w-[280px] bg-white rounded-[20px] p-4 shadow-sm border border-red-200 transition-colors relative">
                          {isAdmin && (
                             <button onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: filteredSchedule.findIndex(s=>s.time === currentLiveSlot.time), eventIndex: evtIndex, data: event }); }} className="absolute -top-2 -right-2 p-2 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 rounded-full shadow-sm z-20">
                               <Edit3 className="w-3.5 h-3.5" />
@@ -967,10 +792,10 @@ export default function App() {
                                 {SCHOOLS[matchObj[2]].name}
                               </div>
                             </div>
-                            {event.referee && (
+                            {(event.referee || defaultRef) && (
                               <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
                                 <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
-                                <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700">{event.referee}</span>
+                                <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
                               </div>
                             )}
                           </>
@@ -984,10 +809,10 @@ export default function App() {
                                  </span>
                               )}
                             </div>
-                            {event.referee && (
+                            {(event.referee || defaultRef) && (
                               <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
                                 <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
-                                <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700">{event.referee}</span>
+                                <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
                               </div>
                             )}
                           </div>
@@ -1099,6 +924,7 @@ export default function App() {
                           if (selectedSchoolFilter !== 'Todos' && !showMyRoute && /(SB|SF|MC)/.test(event.title)) {
                              isHighlightedBySchool = event.title.includes(selectedSchoolFilter);
                           }
+                          const defaultRef = FACILITIES[event.facility]?.defaultRef;
 
                           return (
                             <div key={evtIndex} className={`bg-white rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border transition-all duration-300 group hover:-translate-y-1 relative ${isHighlightedBySchool ? 'ring-2 ring-indigo-400 border-transparent shadow-lg' : isLive ? 'border-red-100 hover:border-red-300 hover:shadow-lg ring-1 ring-red-50' : 'border-slate-100 hover:border-indigo-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]'}`}>
@@ -1148,10 +974,10 @@ export default function App() {
                                         </div>
                                       </div>
                                       {/* ENCARGADO / ÁRBITRO DEL PARTIDO */}
-                                      {event.referee && (
+                                      {(event.referee || defaultRef) && (
                                         <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
                                           <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
-                                          <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700">{event.referee}</span>
+                                          <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
                                         </div>
                                       )}
                                     </>
@@ -1169,10 +995,10 @@ export default function App() {
                                       )}
                                     </div>
                                     {/* ENCARGADO / ÁRBITRO EVENTO GENERAL */}
-                                    {event.referee && (
+                                    {(event.referee || defaultRef) && (
                                       <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2.5 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-lg w-fit">
                                         <ClipboardList className="w-3 h-3 mr-1.5 text-indigo-400" />
-                                        <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700">{event.referee}</span>
+                                        <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
                                       </div>
                                     )}
                                   </div>
