@@ -8,43 +8,46 @@ if (typeof document !== 'undefined' && !document.getElementById('tailwind-cdn'))
   document.head.appendChild(script);
 }
 
-// --- ICONOS INTEGRADOS COMPRIMIDOS (Sin dependencias externas) ---
+// --- ICONOS INTEGRADOS COMPRIMIDOS ---
 const Icons = {
-  MapPin: <g><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></g>,
-  Calendar: <g><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></g>,
-  Clock: <g><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></g>,
-  Trophy: <g><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></g>,
-  Filter: <g><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></g>,
-  Users: <g><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>,
-  Activity: <g><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></g>,
-  Medal: <g><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="M13 12l5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><polyline points="12 18 12 15.5 11 16"/></g>,
-  ExternalLink: <g><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></g>,
-  MapIcon: <g><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></g>,
-  ClipboardList: <g><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></g>,
-  Search: <g><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></g>,
-  ChevronRight: <g><path d="m9 18 6-6-6-6"/></g>,
-  X: <g><path d="M18 6 6 18"/><path d="m6 6 12 12"/></g>,
-  FileText: <g><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></g>,
-  Star: <g><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></g>,
-  Info: <g><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></g>,
-  Sparkles: <g><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></g>,
-  Timer: <g><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></g>,
-  Navigation: <g><polygon points="3 11 22 2 13 21 11 13 3 11"/></g>,
-  PlayCircle: <g><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></g>,
-  Lock: <g><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></g>,
-  Unlock: <g><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></g>,
-  Edit3: <g><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></g>,
-  Save: <g><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></g>,
-  Send: <g><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></g>,
-  Database: <g><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></g>,
-  RefreshCw: <g><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g>
+  MapPin: () => <g><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></g>,
+  Calendar: () => <g><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></g>,
+  Clock: () => <g><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></g>,
+  Trophy: () => <g><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></g>,
+  Filter: () => <g><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></g>,
+  Users: () => <g><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>,
+  Activity: () => <g><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></g>,
+  Medal: () => <g><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="M13 12l5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><polyline points="12 18 12 15.5 11 16"/></g>,
+  ExternalLink: () => <g><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></g>,
+  MapIcon: () => <g><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></g>,
+  ClipboardList: () => <g><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></g>,
+  Search: () => <g><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></g>,
+  ChevronRight: () => <g><path d="m9 18 6-6-6-6"/></g>,
+  X: () => <g><path d="M18 6 6 18"/><path d="m6 6 12 12"/></g>,
+  FileText: () => <g><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></g>,
+  Star: () => <g><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></g>,
+  Info: () => <g><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></g>,
+  Sparkles: () => <g><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></g>,
+  Timer: () => <g><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></g>,
+  Navigation: () => <g><polygon points="3 11 22 2 13 21 11 13 3 11"/></g>,
+  PlayCircle: () => <g><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></g>,
+  Lock: () => <g><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></g>,
+  Unlock: () => <g><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></g>,
+  Edit3: () => <g><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></g>,
+  Save: () => <g><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></g>,
+  Send: () => <g><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></g>,
+  Database: () => <g><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></g>,
+  RefreshCw: () => <g><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g>
 };
 
-const Icon = ({ name, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    {Icons[name]}
-  </svg>
-);
+const Icon = ({ name, className = "" }) => {
+  const Content = Icons[name];
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {Content && <Content />}
+    </svg>
+  );
+};
 
 const MapPin = (p) => <Icon name="MapPin" {...p} />;
 const Calendar = (p) => <Icon name="Calendar" {...p} />;
@@ -60,6 +63,7 @@ const ChevronRight = (p) => <Icon name="ChevronRight" {...p} />;
 const X = (p) => <Icon name="X" {...p} />;
 const FileText = (p) => <Icon name="FileText" {...p} />;
 const Star = (p) => <Icon name="Star" {...p} />;
+const Info = (p) => <Icon name="Info" {...p} />;
 const Sparkles = (p) => <Icon name="Sparkles" {...p} />;
 const Timer = (p) => <Icon name="Timer" {...p} />;
 const Navigation = (p) => <Icon name="Navigation" {...p} />;
@@ -86,7 +90,7 @@ const FACILITIES = {
 
 const SCHOOLS = {
   "SB": { name: "San Buenaventura", color: "bg-blue-100 text-blue-800 border-blue-300", badge: "bg-blue-600", short: "SB" },
-  "SF": { name: "San Francisco", color: "bg-orange-100 text-orange-800 border-orange-300", badge: "bg-orange-500", short: "SF" },
+  "SF": { name: "San Francisco de Asís", color: "bg-orange-100 text-orange-800 border-orange-300", badge: "bg-orange-500", short: "SF" },
   "MC": { name: "Melchor Cano", color: "bg-purple-100 text-purple-800 border-purple-300", badge: "bg-purple-600", short: "MC" }
 };
 
@@ -101,8 +105,8 @@ const SPORT_TO_FACILITY = {
   'Cross': ['Cross']
 };
 
-// --- HORARIO REVISADO EXHAUSTIVAMENTE (SIN "PARTIDO" O "GENERAL" GENÉRICOS POR LA TARDE) ---
-const SCHED_RAW = "10:20 - 10:40^Campo Grande|SB - MC|ALE MASC|Óscar^Campo Pequeño|SB - MC|ALE FEM|David^Pádel|SF - SB|CAD FEM|Julia^Cross|1600m|INFANTIL|Juan~10:45 - 11:05^Campo Grande|SB - SF|ALE MASC|Óscar^Campo Pequeño|SB - SF|ALE FEM|David^Pádel|MC - SF|CAD FEM|Julia^Cross|Carrera|ALEVIN|Gaspar~11:10 - 11:30^Campo Grande|SF - MC|ALE MASC|Óscar^Campo Pequeño|SF - MC|ALE FEM|David^Gimnasio|MC - SF|ALE MIXTO|Julia^Arena Ajedrez|Juego|ALEVIN|Valladolid 7~11:40 - 12:00^Campo Grande|SB - MC|INF MAS|Óscar^Campo Pequeño|SB - MC|INF FEM|David^Gimnasio|SF - SB|CAD MIXTO|Julia^Piscina|200m|CAD MASC|María^Arena Petanca|Juego|INFANTIL|Sergio~12:00 - 12:20^Campo Grande|SB - SF|INF MAS|Óscar^Campo Pequeño|SB - SF|INF FEM|David^Gimnasio|MC - SB|CAD MIXTO|Julia^Pádel|SF - SB|CAD MAS|Julia^Cross|Carrera|CADETE|Juan~12:20 - 12:40^Campo Grande|SF - MC|INF MAS|Óscar^Campo Pequeño|SF - MC|INF FEM|David^Piscina|200 M|CAD FEM|María^Pádel|SB - MC|CAD MAS|Julia~12:40 - 13:00^Campo Grande|SB - MC|CAD MAS|Óscar^Campo Pequeño|SB - MC|CAD FEM|David^Gimnasio|MC - SF|INF MIXTO|Julia^Arena Ajedrez|Juego|CADETE|Valladolid 7~13:00 - 13:20^Campo Grande|SB - SF|CAD MAS|Óscar^Campo Pequeño|SB - SF|CAD FEM|David^Gimnasio|SF - SB|INF MIXTO|Julia^Pádel|SF - SB|INF MAS|Julia~13:20 - 13:40^Campo Grande|SF - MC|CAD MAS|Óscar^Campo Pequeño|SF - MC|CAD FEM|David^Gimnasio|MC - SB|INF MIXTO|Julia^Piscina|50 M|ALEVIN|María~13:40 - 14:00^Piscina|Relevos|INFANTIL|María^Pádel|MC - SF|INF MAS|Julia^Arena Petanca|Juego|CADETE|Sergio~14:00 - 14:20^Piscina|Relevos|CADETE|María^Pádel|SB - MC|INF FEM|Julia^Cross|Carrera|GENERAL|Juan~14:50 - 15:00^Campo Grande|Entrega de Trofeos y Clausura|CLAUSURA|Organización";
+// --- HORARIO REVISADO ---
+const SCHED_RAW = "10:00 - 10:20^Campo Grande|Inauguración|GENERAL|Organización~10:20 - 10:30^Campo Grande|SB - SF|INF MAS|^Campo Pequeño|SB - MC|INF MAS|^Pádel|MC - SF|INF MAS|^Piscina|50m (series)|INF MAS|~10:20 - 10:50^Cross|Carrera|INF MAS|~10:30 - 10:40^Pádel|SF - SB|INF FEM|^Arena Ajedrez|Libre para recreos|INF FEM|~10:45 - 10:50^Campo Grande|MC - SF|ALE MAS|^Campo Pequeño|SF - SB|ALE MAS|^Pádel|SB - MC|ALE MAS|^Piscina|50m (series)|ALE MAS|^Arena Ajedrez|Libre|ALE MAS|~10:50 - 11:05^Pádel|MC - SF|ALE FEM|^Arena Ajedrez|Libre|ALE FEM|^Arena Petanca|Juego|INF FEM|~10:50 - 11:20^Cross|Carrera|INF FEM|~11:05 - 11:10^Pádel|SF - SB|BENJ MAS|^Piscina|50m|BENJ MAS|^Arena Ajedrez|Libre|BENJ MAS|~11:10 - 11:20^Campo Grande|SB - MC|BENJ FEM|^Campo Pequeño|MC - SF|BENJ FEM|^Pádel|SB - MC|BENJ FEM|^Arena Ajedrez|Libre|BENJ FEM|~11:20 - 11:30^Gimnasio|MC - SF|ALE MAS|^Arena Ajedrez|Libre|ALE MAS|^Arena Petanca|Juego|ALE MAS|~11:20 - 11:50^Cross|Carrera|ALE MASC|~11:30 - 11:40^Piscina|Relevos|ALEVIN|~11:40 - 11:50^Campo Grande|SB - MC|ALE MAS|^Campo Pequeño|SB - MC|ALE MAS|^Gimnasio|SF - SB|ALE MAS|^Piscina|200m|CAD MAS|^Arena Ajedrez|Juego|CAD MAS|^Arena Petanca|Juego|CAD MAS|~11:50 - 12:00^Pádel|SF - SB|ALE FEM|~11:50 - 12:20^Cross|Carrera|ALE FEM|~12:00 - 12:10^Gimnasio|MC - SB|ALE FEM|^Arena Ajedrez|Juego|INFANTIL|^Arena Petanca|Juego|INFANTIL|~12:10 - 12:20^Pádel|SF - SB|ALE FEM|^Piscina|200 M|COMPETICIÓN|~12:20 - 12:30^Campo Grande|MC - SF|CAD MAS|~12:20 - 12:50^Cross|Carrera|CAD MAS|~12:30 - 12:35^Campo Pequeño|SB - MC|CAD MAS|^Piscina|200 M|COMPETICIÓN|^Arena Ajedrez|Juego|CADETE|^Arena Petanca|Juego|CADETE|~12:40 - 12:50^Campo Grande|SF - SB|CAD MAS|^Piscina|200 M|COMPETICIÓN|^Arena Ajedrez|Juego|CADETE|^Arena Petanca|Juego|CADETE|~12:50 - 12:55^Arena Ajedrez|Juego|CAD FEM|^Arena Petanca|Juego|CAD FEM|~12:50 - 13:20^Cross|Carrera|CAD FEM|~13:00 - 13:10^Campo Grande|SB - MC|CAD FEM|~13:10 - 13:15^Pádel|MC - SF|CAD FEM|~13:20 - 13:30^Campo Grande|SF - SB|CAD FEM|^Campo Pequeño|SB - MC|CAD FEM|^Gimnasio|MC - SF|CAD FEM|~13:30 - 13:35^Pádel|SF - SB|INFANTIL|^Piscina|Relevos|INFANTIL|~13:40 - 13:50^Campo Grande|MC - SF|CADETE|^Campo Pequeño|SF - SB|CADETE|^Gimnasio|SF - SB|CADETE|^Piscina|Relevos|CADETE|~13:50 - 13:55^Pádel|SB - MC|CADETE|~14:00 - 14:10^Campo Grande|SB - MC|CADETE|^Campo Pequeño|MC - SF|CADETE|^Gimnasio|MC - SB|CADETE|^Piscina|Libre|GENERAL|~14:20 - 14:30^Campo Grande|SB - MC|CADETE|^Gimnasio|SB - SF|CADETE|^Campo Pequeño|SB - MC|CADETE|^Pádel|MC - SF|CADETE|^Piscina|SB - SF|ALEVIN|^Arena Ajedrez|SB - MC|ALEVIN|~14:30 - 14:40^Campo Grande|SB - SF|CADETE|^Campo Pequeño|SB - SF|CADETE|^Pádel|SF - SB|CADETE|^Piscina|SB - SF|ALEVIN|~14:40 - 14:50^Campo Grande|SF - MC|CADETE|^Campo Pequeño|SF - MC|CADETE|^Pádel|SB - MC|CADETE|^Piscina|SF - MC|INFANTIL|~14:50 - 15:00^Campo Grande|Entrega de Trofeos y Clausura|CLAUSURA|Organización";
 
 const buildSchedule = () => SCHED_RAW.split('~').map(slotStr => {
   const [time, ...eventsStr] = slotStr.split('^');
@@ -116,12 +120,11 @@ const buildSchedule = () => SCHED_RAW.split('~').map(slotStr => {
 const INITIAL_SCHEDULE = buildSchedule();
 
 // --- SISTEMA DE COMPRESIÓN EXTREMA DE DATOS PARA PARTICIPANTES ---
-// Reemplazando saltos de línea con estructuras delimitadas.
 const RAW_DATABASE = {
   'Pádel': 'SB|ALE MASC:Juandi,Pablo Gallego|ALE FEM:Emma,Sara,Nerea|INF MAS:Angel Muñoz 1c,Hector 2a|CAD MAS:camacho / adrian,Felix 3b / Pablo 3b|CAD FEM:marta / ainhoa,aitana / daniela,diego rueda / Adrian,Carla_SF|ALE MASC:Pablo,Sergio|ALE FEM:Valeria,Daniela|INF MAS:Mario,Ian|INF FEM:Raquel,Valentina|CAD MAS:Hugo,Iker|CAD FEM:Angela,Daniela_MC|ALE MASC:Edgar,Olmo|ALE FEM:Ainhoa,Erika|CAD MAS:Arturo,Ruben,Avacom|CAD FEM:Maria Elena,Andrea,Carmen',
   'Voleibol': 'SB|INF:Paula Contera 1c,Irene Rivera 1c,Lucas Cabrera 1c,Ariadna Infantes 2a,Iwola 2a,Alvaro Ariza 2a,Ainhoa 1b,Martrin 2c|CAD:Roa 3d,Kevin,victoria 3c,Adrian,eva 3c,Nerea,Orlando 3b,Pablo 3b,Esther,Delfina,ainhara 3a,Elena Lahoz 3a,Sara del olmo 3a,Zaira,Lucia Lopez,Bea,Alba Lopez 4a,Andrea 4a,Irene Sobreviela 4a_SF|INF:Sofia,Alejandro,Rebeca,Isabela,Sara,Lucia,Olalla,Michael,Paula,Alya,Alba,Prisco,Manuel,Claudia,Izan|CAD:Izan,Kayque,Mayeline,Gabriela,Lucia,Jesus,Yamile,Jessica,Paula,Diego,Carla,Isabela,Lucia,Jorge,Dennis,Iker,Elys,Karam_MC|INF:Dani,Axcel,Janna,Jonal,Juan Pablo,Elvis,Daria,Violeta,Nuria,Claudia|CAD:Pilar,Andrei,Ines,Lucia,Valentina,Mostafa,Elena,Dina,Kenny,Juan Carlos,Yassir',
   'Baloncesto': 'SB|ALE MASC:Daniel G,Quique,Luis,Moussa,Paulo,Anthony,Eliel,Gabriel|ALE FEM:Maira,Valentina,Carla O.,Ana C.,Julia R.,Carla S.,Susana,Samira|INF MAS:Sammy Andres 1c,Oliver 2B,Dilan Gael 1c,Amores 1c,Carlos Moises 1b,Daniel marius 2c|INF FEM:Estrella Muzo 1c,Elena Perez 2a,Almudena 2a,Nayara 2c|CAD MAS:Franly 3d,Sebas 3a,Culebras 3b,adrian 3a,Diego 3a|CAD FEM:Lucia Baeza 3c,Maria Baeza 3b,Carla 3a,Irene Sanjuan 3a,Bea 4a_SF|ALE MASC:Joseph,Zeus,Daniel,Luca,Aitor,Victor,Juan Felipe,Zakaria,Diego|ALE FEM:Nahiara,Inés,Lucía,Erika,Sara|INF MAS:Neizan,Carlos,Mario,Ali,Hector,Javier,Gonzalo,Alejandro,Jayden|CAD MAS:Diego,Elys,Izan,Lucas,Samuel|CAD FEM:Sofia,María,Daniela,Claudia_MC|INF MAS:David,Ruben,Luis Ángel,Pablo|ALE MASC:Jose Luis,Guillermo,Saber,Olmo|ALE FEM:Nilde,Natalia,Iratxe|CAD MAS:Omar,Arturo,Juan Carlos',
-  'Petanca': 'SB|ALE MASC:Daniela,Pablo,Elena,Yuxi,Quique,Lorenzo,Aldara,Cristina,Antonio,Emma,Uriel,Gabriel,Samara,Moreta,Sebas,Carmen,AITANA GUAMAN,YAIZA DE LA CAL,SARA JAREÑO,ARTURO ARRIBAS,PEDRO PRIOR,CARLOS CARBALLO,MANUELA ESTEBAN,EVA CAMACHO,MARÍA CUESTA|INF MAS:Noa 2b,Patricia 2b,Julia 1b,Fernanda 1b,Marcos Perez 1c,Lynet Terrero 1c,Dylan 2a,Elena Perez 2a,Cesar 2a,Almudena 2a,Stere 2a,Jorge 2c,Annabeth 2c,Sofía Spolosino 1a,Victoria Peruga 1a|CAD MAS:Hector Sanchidrian,Preda 3c,Silvia Florentin 3c,Jose 3c,Lucia Conejo 3a,Lucia Martin 3a,Lucia Lopez 3a,Sara Garcia 3a,Maria Garcia 3a,Partricia Pintilie 3a,Olimpia 4a,Pilar 4a,Luna 4a,Azucena 4a,Gadea 4a,Sara 4a,Daniela q 4a,Carlota 4a,Marta 4a,Irene sobreviela_SF|ALE MASC:Nahiara,Raquel,Ismael,Alyss,Vicor,Celia,Olivia,Sergio,Claudia,Alisson,Cristofer,Diego,Juan,Manuela,Pablo,Valeria,Sara,Sheyla,Mariana,Ariadna,Oliver,Luca|INF MAS:Natalia,Sofia,Manuel,Alexia,Pablo|CAD MAS:Roberto,Isabela,Lucia,Maria,Daniela,Sofia,Ana,Yamile,Lucas,Jimena_MC|GENERAL:Hugo,Mario,Marcos',
+  'Petanca': 'SB|ALE MASC:Daniela,Pablo,Elena,Yuxi,Quique,Lorenzo,Aldara,Cristina,Antonio,Juan,Alejandro,Marcos,Izan,Victor,Adrian,Hugo,Lara,Ivan,Diego,Aitor,Nico,Rodrigo,Daniel|INF MAS:Noa 2b,Patricia 2b,Julia 1b,Fernanda 1b,Marcos Perez 1c,Lynet Terrero 1c,Dylan 2a,Elena Perez 2a,Cesar 2a,Izan 2b,Marcos Martin 2b,Aitana 1a,Ariadna 1a,Nerea 1a,Celia 1b,Nuria 1b|CAD MAS:Preda 3c,Silvia Florentin 3c,Jose 3c,Lucia Conejo 3a,Lucia Martin 3a,Lucia Lopez 3a,Irene 3a,Daniela 3a,Sofia 3b,Sara 3b,Ines 3b,Jimena 3b,Carla 3b,Marcos 3c,Nacho 3c,Carlos 3c,Marcos 4a,Ruben 4a,Iker 4a_SF|ALE MASC:Nahiara,Hugo,Aitor,Iker,Nico,Alba,David,Marcos,Leo,Mateo,Pablo,Izan,Mario,Alvaro,Adrian,Rodrigo|INF MAS:Natalia,Rocio,Alejandro,Noelia,Lucia,Daniel,Ismael,Elias,Ivan,Diego|CAD MAS:Roberto,Raul,Alex,Ines,Paula,Carla,Ruben,Irene,Angela,Celia,Alvaro,Sara,Marta,Silvia,Jimena,Elena_MC|ALE MASC:Guillermo,Santi,Andres,Alfonso,Manuel,Izan,Jose,Iker|INF MAS:Jonal,David,Izan,Rayan,Ismael|CAD MAS:Maroua,Zaira,Lidia,Nerea,Ariadna,Daniel,Javier',
   'Ajedrez': 'SB|ALE:MOUSSA MBENGUE,IAGO VILLEGAS,FABIO LOPEZ,SAMUEL DIAZ,LAURA GONZALES,MIRANDA RODRIGUEZ,ANAIS TURBATU,DRAKE MENDOZA,ZECHUAN,IÑAKI RUIZ,SHANTAL RODRIGUEZ,LUZ MARQUEZ,Lorenzo,Pablo,Quique,Facundo,Antonio,Santi,Miguel,Gabriel|INF:Arturo Dominguez 1c,Marcos Perez 1c,Claudia 1c,Dylan 2a,Celia Mendez 2a,Leo de las Heras 1b,Leo Lahoz 1b,Pedro Peruga 1b,Morena 2c,Rivera 2c|CAD:Hanyu 3d,Felix Gonzalez 3b,Irene perez 4a,Maria Lara 4b,Alvaro Martin 4b,Sofia arenillas 4b,Natalia Gallego 4b_SF|ALE:Roberto,Samuel,Javier,Zeus,Fayz,Marco,Nicolás,Juan,Marcelo,Aitor,Saúl,Diego,Dylan,Lucia|INF:Izan,Gabriel,Hugo,Alejandro,Valentina,Mario,Aleksander,Héctor,David|CAD:Marcos,Hugo,Miguel_MC|ALE:Mateo,Jaime,Edgar,Saber|INF:Jonal,Juan Pablo,Elvis,Sasha,Elsa|CAD:Rabab,Mostafa,Alonso',
   'Fútbol': 'SB|BENJ MASC:Mario,Juanse,Alex,Dani,Hugo,Marcos|BENJ FEM:Camila,Sara Bullido,Carmen,Alba,Jade,Vega|ALE MASC:Rodrigo,Javi,Iván,Félix,Derek,DANI,RUBÉN,SALVA,ALEX R,ALEJANDRO B.,ALEX L,SAMUEL|ALE FEM:Daniela,Nagore,Sara R,Sara C,Yma,Catalina,Fabi,Irina,Emma H.,Valle,MJose,Alma,Emma B.|INF MAS:Dani de Leon 1c,Adrian Ramos 1c,Nacho (2a,Iago (2a,Raul del Pino 1b,Carmelo 1b,Alonso (2c,Aday (2c,Raul Muñoz 1a,Adrián Maroto 1a,luca 2b,diego j 2b|INF FEM:Yara Grados 1c,Lynet 1c,Adela (2a,Maria (2a,Candela 2c,Elena 2c,aitana 2b,amaya 2b|CAD MAS:Ruben Perez 3d,Castaño3d,Kevin 3d,Potosi 3b,Culebras 3b,Nacho 3a,Ivan 3a,Alexis3a,Izan(3a,sebastian 4a,cava 4b,gallego 4b,alecsis4c,Gualan 4c|CAD FEM:Silvia Florentin 3c,Laura Moreno 3b,nerea Granados 3b,Irene San Juan 3a,Sofia,Carla 3a,Carlota Vazquez 4c,Ainhoa Sainz 4c,Navarro (4d_SF|ALE MASC:Mateo,Hamza,Hugo,Marco,Javier,Gabriel,Rubén,Iván,Alejandro,Leo,Oliver,Marco,Saúl,Oliver|ALE FEM:Daniela,Eva,Carla,Carlota,Gabriela,Noelia,Mariana,Marwa|INF MAS:Fabián,Hector,Pablo,Ali,Mario,Raúl,Ian,Oliver,Gonzalo,Jayden|CAD MAS:Óliver,Álvaro,Matías,Alejandro,Jorge,Jose,Elys,Iker,Karam,Dennis,Lucas,Abel,Hugo,Mateo,Saul,Alejandro,Izan,Albar,Kayque,Oswaldo|CAD FEM:Daniela,Jessica,Angela,Inas,Yaiza_MC|BENJ MASC:Thiago,Enzo,Martin,Allan,Oleksander,Zhair,Aaron,Adrian,Pablo,Mateo|BENJ FEM:Antonella,Ada,Eden,Olivia,Roaya,Covadonga,Beatriz|ALE MASC:Hugo,Marcus,Mario,Jaime,Edgar,Guillermo,Ayman,Brandon,Olmo|ALE FEM:Maria,Manar,Alysa,Sofia,Erika,Ainhoa,Nilde,Yasmina,Natalia,Fabiana,Iratxe|INF MAS:Axcel,Nicu,Darius,Kevin,Santiago,Ruben,Daniel,Pablo,Angel,Elvis,Manuel|INF FEM:Claudia,Nuria,Elsa,Violeta,Sasha,Natalia,Daria|CAD MAS:Rodrigo,Yanis,Mario,Avacom,Denis,Jean Paul,Mostafa,Yassir,Juan Miguel,Hugo,Andrei|CAD FEM:Aslhy,Maroua,Mariam,Carmen,Andrea,Diana,Elena,Ana Isabel,Dina,Mara',
   'Natación': 'SB|ALE MASC:Ángel (e),Santi (equipo)|ALE FEM:ELSA GONZALEZ (e),EVA BAGIU,PAULA R.,ADRIANA C.,Aldara,Naza,Elena,Lía,Sofía (e),Bea|INF MAS:Gabriel Ogando 1b,Pablo Granados 1b,Cristian Mamani 1b,Capello 2a,Alvaro Gallego 2a,Ignacio Escobar 2a,Pelayo 2c,Michel 2c|INF FEM:Carla 1b,Amanda 1b,Alejandra Alonso 1a,Irene Rubio 1b,Marian Estrada 1a,Sara sanchez 1a,Martina 1a,maria escobar 2b,Alba 2c,Villegas (2C)|CAD MAS:David (4a,camacho 3c,hugo 4b,antonio 3a,fran 4b,dani (4b),Jose (4c)|CAD FEM:eva bursuc 3c,miriam 3c,Laura Moreno 3b,sara davi 3a,maria3a,sara 3a,Paula (4a,ruth (4a,Sofía Rodriguez 4c_SF|ALE MASC:Marco|ALE FEM:Sofía,Inés,Leire,Valeria,Manuela,Alyss,Adriana|INF MAS:Neizan,Michael,Ali,Javier,Carlos|INF FEM:Raquel,Natalia,Sofia,Mª Milagros,Emma,Alexia,Rebeca,Olalla|CAD MAS:Adrián,Karam,Dennis|CAD FEM:Noemi,Gemma,Ana,Sofia,Maria,Gabriela,Lucia,Mayeline_MC|ALE MASC:Guillermo,Olmo|ALE FEM:Sofia,Yasmina|INF MAS:Juan Pablo|INF FEM:Hassna|CAD MAS:Samuel,Alonso,Andrei,Ruben|CAD FEM:Rabab,Irene',
@@ -155,14 +158,14 @@ export default function App() {
   
   const [schedule, setSchedule] = useState(() => {
     try {
-      const saved = window.localStorage.getItem('intercentros_schedule_v32');
+      const saved = window.localStorage.getItem('intercentros_schedule_v38');
       return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
     } catch (e) { return INITIAL_SCHEDULE; }
   });
 
   const [participants, setParticipants] = useState(() => {
     try {
-      const saved = window.localStorage.getItem('intercentros_participants_v32');
+      const saved = window.localStorage.getItem('intercentros_participants_v38');
       return saved ? JSON.parse(saved) : INITIAL_PARTICIPANTS;
     } catch (e) { return INITIAL_PARTICIPANTS; }
   });
@@ -282,7 +285,7 @@ export default function App() {
                if (existingSlot) {
                   const existingEv = existingSlot.events.find(e => e.facility === fac);
                   if (existingEv) {
-                     if (existingEv.score) existingScore = existingEv.score;
+                     if (existingEv.score) existingScore = existingEv.score; // MANTIENE RESULTADOS LOCALES
                      if (existingEv.referee && existingReferee === "") existingReferee = existingEv.referee;
                   }
                }
@@ -294,7 +297,7 @@ export default function App() {
 
       if (newSchedule.length > 0) {
          setSchedule(newSchedule);
-         window.localStorage.setItem('intercentros_schedule_v32', JSON.stringify(newSchedule));
+         window.localStorage.setItem('intercentros_schedule_v38', JSON.stringify(newSchedule));
       }
     } catch (err) {
       console.error(err);
@@ -390,7 +393,7 @@ export default function App() {
     }
     
     setParticipants(newParticipants);
-    window.localStorage.setItem('intercentros_participants_v32', JSON.stringify(newParticipants));
+    window.localStorage.setItem('intercentros_participants_v38', JSON.stringify(newParticipants));
     if (!silent) setSyncStatus('✅ ¡Sincronización Completa con el Excel!');
     setIsSyncing(false);
   };
@@ -472,9 +475,9 @@ export default function App() {
     }).filter(slot => slot.events.length > 0);
   }, [schedule, selectedFacility, selectedSchoolFilter, showMyRoute, favoriteAthletesFullData]);
 
+  // Se modificó isTimeSlotActive para que sea independiente del DÍA del año, funcionando "hoy" tal y como pides.
   const isTimeSlotActive = (timeString) => {
     const timeToUse = isSimulatingLive ? new Date('2026-04-17T12:25:00') : currentTime; 
-    if (!isSimulatingLive && (timeToUse.getFullYear() !== 2026 || timeToUse.getMonth() !== 3 || timeToUse.getDate() !== 17)) return false; 
     
     const [startStr, endStr] = timeString.split(' - ');
     if (!startStr || !endStr) return false;
@@ -482,11 +485,11 @@ export default function App() {
     const [startH, startM] = startStr.split(':').map(Number);
     const [endH, endM] = endStr.split(':').map(Number);
     
-    const start = new Date(timeToUse).setHours(startH, startM, 0);
-    const end = new Date(timeToUse).setHours(endH, endM, 0);
-    const now = timeToUse.getTime();
+    const nowMinutes = timeToUse.getHours() * 60 + timeToUse.getMinutes();
+    const startMinutes = startH * 60 + startM;
+    const endMinutes = endH * 60 + endM;
 
-    return now >= start && now <= end;
+    return nowMinutes >= startMinutes && nowMinutes < endMinutes;
   };
 
   const currentLiveSlot = useMemo(() => filteredSchedule.find(slot => isTimeSlotActive(slot.time)), [filteredSchedule, currentTime, isSimulatingLive]);
@@ -522,16 +525,23 @@ export default function App() {
     }
   };
 
+  const handleLogout = () => {
+    setIsAdmin(false);
+    setShowAdminPanel(false);
+    setEditingItem(null);
+    setAdminPassword('');
+  };
+
   const handleSaveEdit = () => {
     if (editingItem.type === 'athlete') {
         const updated = participants.map(p => p.id === editingItem.data.id ? editingItem.data : p);
         setParticipants(updated);
-        window.localStorage.setItem('intercentros_participants_v32', JSON.stringify(updated));
+        window.localStorage.setItem('intercentros_participants_v38', JSON.stringify(updated));
     } else if (editingItem.type === 'match') {
         const updatedSchedule = [...schedule];
         updatedSchedule[editingItem.slotIndex].events[editingItem.eventIndex] = editingItem.data;
         setSchedule(updatedSchedule);
-        window.localStorage.setItem('intercentros_schedule_v32', JSON.stringify(updatedSchedule));
+        window.localStorage.setItem('intercentros_schedule_v38', JSON.stringify(updatedSchedule));
     }
     setEditingItem(null);
   };
@@ -605,7 +615,7 @@ export default function App() {
                  return (
                    <div key={fac} className="bg-white border border-indigo-100/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center shadow-sm hover:shadow-md transition-shadow">
                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg sm:text-xl mr-3 bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60`}>
-                       {facilityData?.icon}
+                       {facilityData?.icon && <facilityData.icon />}
                      </div>
                      <div>
                        <p className="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest">Instalación</p>
@@ -632,6 +642,12 @@ export default function App() {
       
       {/* HEADER ULTRA PREMIUM CON COUNTDOWN */}
       <div className="relative bg-slate-950 pt-10 pb-20 sm:pb-28 px-4 rounded-b-[32px] sm:rounded-b-[60px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col items-center text-center">
+        
+        {/* INDICADOR DE VERSIÓN (ESQUINA SUPERIOR IZQUIERDA) */}
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 text-[10px] text-slate-500 font-mono font-bold z-50 bg-white/5 px-2 py-1 rounded-lg backdrop-blur-md border border-white/10">
+           v38
+        </div>
+
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] opacity-40"></div>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-600/30 rounded-full blur-[120px] pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none"></div>
@@ -730,7 +746,7 @@ export default function App() {
             {/* BOTÓN DEBUG MODO LIVE */}
             <div className="flex justify-end mb-4 sm:mb-6">
                <button onClick={() => setIsSimulatingLive(!isSimulatingLive)} className={`flex items-center text-[9px] sm:text-[10px] font-bold px-3 py-1.5 rounded-full border shadow-sm transition-colors ${isSimulatingLive ? 'bg-red-50 text-red-600 border-red-200 hover:bg-red-100' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'}`}>
-                  <PlayCircle className="w-3 h-3 mr-1.5" /> {isSimulatingLive ? 'Detener Simulación' : 'Simular Día del Evento'}
+                  <PlayCircle className="w-3 h-3 mr-1.5" /> {isSimulatingLive ? 'Detener Simulación' : 'Avanzar a las 12:25 (Prueba)'}
                </button>
             </div>
 
@@ -766,7 +782,7 @@ export default function App() {
                          )}
                         <div className="flex justify-between items-start mb-3 sm:mb-4">
                           <span className={`text-[10px] sm:text-[11px] font-black px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg sm:rounded-xl border ${style.color} flex items-center w-fit shadow-sm`}>
-                            <span className="mr-1.5 text-xs sm:text-sm">{style.icon}</span> {event.facility}
+                            <span className="mr-1.5 text-xs sm:text-sm"></span> {event.facility}
                           </span>
                           <span className="text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md sm:rounded-lg tracking-wider uppercase">
                             {event.category}
@@ -779,13 +795,22 @@ export default function App() {
                                 {SCHOOLS[matchObj[1]].name}
                               </div>
                               
-                              {/* MARCADOR LIVE EN CARRUSEL */}
-                              {event.score ? (
-                                <span className="bg-slate-900 text-white font-black text-[10px] sm:text-xs px-2 py-1.5 rounded-lg shadow-inner z-10 whitespace-nowrap mx-0.5 border border-slate-700">
-                                  {event.score}
-                                </span>
+                              {/* EDICIÓN RÁPIDA DE RESULTADOS PARA ADMINS */}
+                              {isAdmin ? (
+                                <button 
+                                  onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: filteredSchedule.findIndex(s=>s.time === currentLiveSlot.time), eventIndex: evtIndex, data: event }); }}
+                                  className="bg-indigo-600 text-white font-black text-[10px] sm:text-xs px-3 py-1.5 rounded-lg shadow-lg z-10 whitespace-nowrap mx-0.5 hover:bg-indigo-500 transition-colors border border-indigo-400"
+                                >
+                                  {event.score || 'Añadir Resultado'}
+                                </button>
                               ) : (
-                                <span className="text-slate-300 font-black text-[9px] sm:text-[10px] px-1 sm:px-1.5 italic">VS</span>
+                                event.score ? (
+                                  <span className="bg-slate-900 text-white font-black text-xs sm:text-sm px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl shadow-lg z-10 whitespace-nowrap mx-0.5 border border-slate-700">
+                                    {event.score}
+                                  </span>
+                                ) : (
+                                  <span className="text-slate-300 font-black text-[9px] sm:text-[10px] px-1 sm:px-1.5 italic">VS</span>
+                                )
                               )}
 
                               <div className={`flex-1 flex items-center justify-center text-center px-1 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-black leading-tight shadow-sm text-white ${SCHOOLS[matchObj[2]].badge}`}>
@@ -803,15 +828,24 @@ export default function App() {
                           <div className="flex flex-col mt-1">
                             <div className="flex justify-between items-center">
                               <p className="font-black text-slate-800 text-sm sm:text-base">{event.title}</p>
-                              {event.score && (
-                                 <span className="bg-slate-900 text-white font-black text-[10px] sm:text-xs px-2 py-1 rounded-lg shadow-inner whitespace-nowrap ml-2 border border-slate-700">
-                                   {event.score}
-                                 </span>
+                              {isAdmin ? (
+                                <button 
+                                  onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: filteredSchedule.findIndex(s=>s.time === currentLiveSlot.time), eventIndex: evtIndex, data: event }); }}
+                                  className="bg-indigo-600 text-white font-black text-[10px] sm:text-xs px-2 py-1 rounded-lg shadow-lg z-10 whitespace-nowrap ml-2 hover:bg-indigo-500 transition-colors border border-indigo-400"
+                                >
+                                  {event.score || 'Añadir'}
+                                </button>
+                              ) : (
+                                event.score && (
+                                   <span className="bg-slate-900 text-white font-black text-[10px] sm:text-xs px-3 py-1.5 rounded-lg shadow-inner whitespace-nowrap ml-2 border border-slate-700">
+                                     {event.score}
+                                   </span>
+                                )
                               )}
                             </div>
                             {(event.referee || defaultRef) && (
-                              <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
-                                <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
+                              <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2.5 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-lg w-fit">
+                                <ClipboardList className="w-3 h-3 mr-1.5 text-indigo-400" />
                                 <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
                               </div>
                             )}
@@ -847,7 +881,7 @@ export default function App() {
                     {showMyRoute && (
                       <button 
                         onClick={shareWhatsApp} 
-                        className="flex-1 sm:flex-none px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-[16px] text-white text-xs sm:text-sm font-black transition-all shadow-sm bg-green-50 hover:bg-green-600 flex items-center justify-center"
+                        className="flex-1 sm:flex-none px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-[16px] text-white text-xs sm:text-sm font-black transition-all shadow-sm bg-green-500 hover:bg-green-600 flex items-center justify-center"
                       >
                         <Send className="w-4 h-4 sm:mr-2" /> <span className="hidden sm:inline">Enviar</span>
                       </button>
@@ -885,7 +919,7 @@ export default function App() {
                       const facilityData = FACILITIES[facility];
                       return (
                         <button key={facility} onClick={() => setSelectedFacility(facility)} className={`snap-start whitespace-nowrap flex items-center px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold transition-all duration-300 ${isSelected ? 'bg-indigo-600 text-white shadow-md transform scale-[1.02]' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
-                          {facilityData?.icon && <span className="mr-1.5 sm:mr-2 text-base sm:text-lg drop-shadow-sm">{facilityData.icon}</span>}
+                          {facilityData?.icon && <span className="mr-1.5 sm:mr-2 text-base sm:text-lg drop-shadow-sm"></span>}
                           {facility}
                         </button>
                       );
@@ -929,21 +963,11 @@ export default function App() {
                           return (
                             <div key={evtIndex} className={`bg-white rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border transition-all duration-300 group hover:-translate-y-1 relative ${isHighlightedBySchool ? 'ring-2 ring-indigo-400 border-transparent shadow-lg' : isLive ? 'border-red-100 hover:border-red-300 hover:shadow-lg ring-1 ring-red-50' : 'border-slate-100 hover:border-indigo-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]'}`}>
                               
-                              {/* ADMIN EDIT BUTTON */}
-                              {isAdmin && (
-                                <button 
-                                  onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: index, eventIndex: evtIndex, data: event }); }}
-                                  className="absolute top-3 right-3 p-2 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 rounded-full shadow-sm z-20"
-                                >
-                                  <Edit3 className="w-4 h-4" />
-                                </button>
-                              )}
-
                               <div className="flex justify-between items-start mb-3 sm:mb-4">
                                 <span className={`text-[10px] sm:text-[11px] font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl border ${style.color} flex items-center w-fit shadow-sm`}>
                                   <span className="mr-1.5 text-xs sm:text-sm">{style.icon}</span> {event.facility}
                                 </span>
-                                <span className={`text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-md sm:rounded-lg tracking-wider uppercase ${isAdmin ? 'mr-8' : ''}`}>
+                                <span className={`text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-md sm:rounded-lg tracking-wider uppercase`}>
                                   {event.category}
                                 </span>
                               </div>
@@ -960,13 +984,22 @@ export default function App() {
                                           {team1?.name || matchObj[1]}
                                         </div>
                                         
-                                        {/* MARCADOR EN VIVO */}
-                                        {event.score ? (
-                                          <span className="bg-slate-900 text-white font-black text-xs sm:text-sm px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl shadow-lg z-10 whitespace-nowrap mx-0.5 border border-slate-700">
-                                            {event.score}
-                                          </span>
+                                        {/* EDICIÓN DE RESULTADOS RÁPIDA (LOCAL) */}
+                                        {isAdmin ? (
+                                          <button 
+                                            onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: index, eventIndex: evtIndex, data: event }); }}
+                                            className="bg-indigo-600 text-white font-black text-[10px] sm:text-xs px-3 py-1.5 rounded-lg shadow-lg z-10 whitespace-nowrap mx-0.5 hover:bg-indigo-500 transition-colors border border-indigo-400"
+                                          >
+                                            {event.score || 'Añadir Resultado'}
+                                          </button>
                                         ) : (
-                                          <span className="text-slate-300 font-black text-[9px] sm:text-[10px] px-1 sm:px-2 italic">VS</span>
+                                          event.score ? (
+                                            <span className="bg-slate-900 text-white font-black text-xs sm:text-sm px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl shadow-lg z-10 whitespace-nowrap mx-0.5 border border-slate-700">
+                                              {event.score}
+                                            </span>
+                                          ) : (
+                                            <span className="text-slate-300 font-black text-[9px] sm:text-[10px] px-1 sm:px-2 italic">VS</span>
+                                          )
                                         )}
 
                                         <div className={`flex-1 flex items-center justify-center text-center px-1 py-2 sm:py-3.5 rounded-xl sm:rounded-2xl text-[11px] sm:text-[13px] font-black leading-tight shadow-sm text-white transition-all ${team2?.badge || 'bg-slate-500'} ${selectedSchoolFilter === team2?.short ? 'ring-2 sm:ring-4 ring-indigo-500/30 scale-105 z-10' : ''}`}>
@@ -988,10 +1021,19 @@ export default function App() {
                                     <div className="flex justify-between items-center group-hover:text-indigo-600 transition-colors">
                                       <p className="font-black text-slate-800 text-base sm:text-lg pr-8">{event.title}</p>
                                       {/* MARCADOR EVENTO GENERAL */}
-                                      {event.score && (
-                                         <span className="bg-slate-900 text-white font-black text-[10px] sm:text-xs px-3 py-1.5 rounded-lg shadow-inner whitespace-nowrap ml-2 border border-slate-700">
-                                           {event.score}
-                                         </span>
+                                      {isAdmin ? (
+                                        <button 
+                                          onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: index, eventIndex: evtIndex, data: event }); }}
+                                          className="bg-indigo-600 text-white font-black text-[10px] sm:text-xs px-2 py-1 rounded-lg shadow-lg z-10 whitespace-nowrap ml-2 hover:bg-indigo-500 transition-colors border border-indigo-400"
+                                        >
+                                          {event.score || 'Añadir'}
+                                        </button>
+                                      ) : (
+                                        event.score && (
+                                           <span className="bg-slate-900 text-white font-black text-[10px] sm:text-xs px-3 py-1.5 rounded-lg shadow-inner whitespace-nowrap ml-2 border border-slate-700">
+                                             {event.score}
+                                           </span>
+                                        )
                                       )}
                                     </div>
                                     {/* ENCARGADO / ÁRBITRO EVENTO GENERAL */}
@@ -1059,7 +1101,7 @@ export default function App() {
                   </h3>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
-                  {favoriteParticipants.map(p => <AthleteCard key={`fav-${p.id}`} p={p} />)}
+                  {favoriteAthletesFullData.map(p => <AthleteCard key={`fav-${p.id}`} p={p} />)}
                 </div>
               </div>
             )}
@@ -1175,7 +1217,7 @@ export default function App() {
           </button>
           <button onClick={handleAdminLogin} className={`flex-1 flex flex-col items-center justify-center py-2 px-1 rounded-[16px] transition-all duration-300 ${isAdmin || showAdminPanel ? 'text-indigo-600 bg-indigo-50/80 scale-105' : 'text-slate-300 hover:text-slate-500 hover:bg-slate-50'}`}>
             {isAdmin ? <Database className="w-6 h-6 mb-1 stroke-indigo-100 fill-indigo-600" /> : <Lock className="w-6 h-6 mb-1" />}
-            <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider">{isAdmin ? 'Nube / Admin' : 'Acceso'}</span>
+            <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider">{isAdmin ? 'Ajustes' : 'Acceso'}</span>
           </button>
         </div>
       </div>
@@ -1191,7 +1233,7 @@ export default function App() {
                   Área de Organización
                </h3>
                <p className="text-xs text-slate-500 mb-6 text-center font-bold">
-                  Introduce la contraseña para habilitar la edición manual y sincronización en la nube.
+                  Introduce la contraseña para habilitar la edición manual de resultados.
                </p>
                
                <div className="space-y-3">
@@ -1211,7 +1253,7 @@ export default function App() {
         </div>
       )}
 
-      {/* ===================== PANEL DE CONTROL ADMIN (NUBE & EDICIÓN) ===================== */}
+      {/* ===================== PANEL DE CONTROL ADMIN ===================== */}
       {showAdminPanel && isAdmin && (
         <div className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex flex-col justify-end sm:justify-center p-4 sm:p-0 animate-in fade-in duration-200">
            <div className="bg-white rounded-[32px] p-5 sm:p-8 w-full max-w-md shadow-2xl mx-auto animate-in slide-in-from-bottom-10 sm:zoom-in-95 duration-300 pb-28 sm:pb-8">
@@ -1219,17 +1261,23 @@ export default function App() {
                <div className="flex justify-between items-center mb-5 border-b border-slate-100 pb-4">
                  <h3 className="text-lg sm:text-xl font-black text-slate-800 flex items-center">
                     <Database className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-indigo-500" />
-                    Central de Sincronización
+                    Panel de Administración
                  </h3>
                  <button onClick={() => setShowAdminPanel(false)} className="bg-slate-100 p-2 rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-600"><X className="w-5 h-5" /></button>
                </div>
 
+               <div className="bg-emerald-50 border border-emerald-100 text-emerald-800 p-4 rounded-2xl mb-6">
+                 <p className="text-[11px] sm:text-xs font-bold flex items-start">
+                   <Info className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5 text-emerald-600" />
+                   <span>Los resultados que añadas se guardan automáticamente en la <b>memoria de este dispositivo</b>. No necesitas conexión a Firebase.</span>
+                 </p>
+               </div>
+
                <p className="text-[11px] sm:text-xs text-slate-500 mb-5 font-medium leading-relaxed">
-                  Pega los enlaces CSV públicos de tus hojas de Google Sheets. <b>Cada vez que modifiques tu Excel, los horarios y alumnos se actualizarán en la app.</b>
+                  Puedes seguir sincronizando el Excel de manera opcional si cambian los atletas u horarios, pero tus resultados locales tienen prioridad.
                </p>
 
                <div className="space-y-4">
-                  
                   {/* Lista Scrolleable de Inputs */}
                   <div className="max-h-[35vh] overflow-y-auto pr-2 space-y-3 sm:space-y-4 hide-scrollbar">
                     
@@ -1254,7 +1302,7 @@ export default function App() {
                       <span className="text-sm font-bold text-slate-800">Actualización en vivo</span>
                       <span className="text-[10px] text-slate-400 font-bold">Busca cambios en el Excel cada minuto</span>
                     </div>
-                    <button onClick={() => { setAutoSync(!autoSync); window.localStorage.setItem('intercentros_autosync', !autoSync); }} className={`w-12 h-6 rounded-full transition-colors relative shadow-inner ${autoSync ? 'bg-emerald-500' : 'bg-slate-300'}`}>
+                    <button onClick={() => { setAutoSync(!autoSync); window.localStorage.setItem('intercentros_autosync', !autoSync); }} className={`w-12 h-6 rounded-full transition-colors relative shadow-inner ${autoSync ? 'bg-indigo-500' : 'bg-slate-300'}`}>
                        <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform shadow-sm ${autoSync ? 'left-7' : 'left-1'}`}></span>
                     </button>
                   </div>
@@ -1269,11 +1317,11 @@ export default function App() {
                </div>
 
                <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                  <button onClick={() => { setIsAdmin(false); setShowAdminPanel(false); }} className="w-full py-3.5 rounded-xl font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 transition-colors flex items-center justify-center order-2 sm:order-1">
+                  <button onClick={handleLogout} className="w-full py-3.5 rounded-xl font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 transition-colors flex items-center justify-center order-2 sm:order-1">
                      <Unlock className="w-4 h-4 mr-2" /> Cerrar Sesión
                   </button>
                   <button onClick={() => handleFullSync(false)} disabled={isSyncing} className="w-full py-3.5 rounded-xl font-black text-white bg-indigo-600 hover:bg-indigo-700 shadow-[0_4px_15px_rgba(79,70,229,0.3)] transition-all flex items-center justify-center order-1 sm:order-2 disabled:opacity-50">
-                     <RefreshCw className={`w-4 h-4 mr-2 ${isSyncing ? 'animate-spin' : ''}`} /> {isSyncing ? 'Sincronizando...' : 'Forzar Sincronización'}
+                     <RefreshCw className={`w-4 h-4 mr-2 ${isSyncing ? 'animate-spin' : ''}`} /> {isSyncing ? 'Sincronizar Datos' : 'Forzar Sincronización'}
                   </button>
                </div>
            </div>
@@ -1350,7 +1398,7 @@ export default function App() {
                      Cancelar
                   </button>
                   <button onClick={handleSaveEdit} className="flex-1 py-3 rounded-xl font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors flex items-center justify-center">
-                     <Save className="w-4 h-4 mr-2" /> Guardar
+                     <Save className="w-4 h-4 mr-2" /> Guardar (Local)
                   </button>
                </div>
            </div>
