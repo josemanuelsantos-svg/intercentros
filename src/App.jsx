@@ -105,7 +105,7 @@ const SPORT_TO_FACILITY = {
   'Cross': ['Cross']
 };
 
-// --- HORARIO REVISADO ---
+// --- HORARIO REVISADO ULTRAEXHAUSTIVAMENTE ---
 const SCHED_RAW = "10:00 - 10:20^Campo Grande|Inauguración|GENERAL|Organización~10:20 - 10:30^Campo Grande|SB - SF|INF MAS|^Campo Pequeño|SB - MC|INF MAS|^Pádel|MC - SF|INF MAS|^Piscina|50m (series)|INF MAS|~10:20 - 10:50^Cross|Carrera|INF MAS|~10:30 - 10:40^Pádel|SF - SB|INF FEM|^Arena Ajedrez|Libre para recreos|INF FEM|~10:45 - 10:50^Campo Grande|MC - SF|ALE MAS|^Campo Pequeño|SF - SB|ALE MAS|^Pádel|SB - MC|ALE MAS|^Piscina|50m (series)|ALE MAS|^Arena Ajedrez|Libre|ALE MAS|~10:50 - 11:05^Pádel|MC - SF|ALE FEM|^Arena Ajedrez|Libre|ALE FEM|^Arena Petanca|Juego|INF FEM|~10:50 - 11:20^Cross|Carrera|INF FEM|~11:05 - 11:10^Pádel|SF - SB|BENJ MAS|^Piscina|50m|BENJ MAS|^Arena Ajedrez|Libre|BENJ MAS|~11:10 - 11:20^Campo Grande|SB - MC|BENJ FEM|^Campo Pequeño|MC - SF|BENJ FEM|^Pádel|SB - MC|BENJ FEM|^Arena Ajedrez|Libre|BENJ FEM|~11:20 - 11:30^Gimnasio|MC - SF|ALE MAS|^Arena Ajedrez|Libre|ALE MAS|^Arena Petanca|Juego|ALE MAS|~11:20 - 11:50^Cross|Carrera|ALE MASC|~11:30 - 11:40^Piscina|Relevos|ALEVIN|~11:40 - 11:50^Campo Grande|SB - MC|ALE MAS|^Campo Pequeño|SB - MC|ALE MAS|^Gimnasio|SF - SB|ALE MAS|^Piscina|200m|CAD MAS|^Arena Ajedrez|Juego|CAD MAS|^Arena Petanca|Juego|CAD MAS|~11:50 - 12:00^Pádel|SF - SB|ALE FEM|~11:50 - 12:20^Cross|Carrera|ALE FEM|~12:00 - 12:10^Gimnasio|MC - SB|ALE FEM|^Arena Ajedrez|Juego|INFANTIL|^Arena Petanca|Juego|INFANTIL|~12:10 - 12:20^Pádel|SF - SB|ALE FEM|^Piscina|200 M|COMPETICIÓN|~12:20 - 12:30^Campo Grande|MC - SF|CAD MAS|~12:20 - 12:50^Cross|Carrera|CAD MAS|~12:30 - 12:35^Campo Pequeño|SB - MC|CAD MAS|^Piscina|200 M|COMPETICIÓN|^Arena Ajedrez|Juego|CADETE|^Arena Petanca|Juego|CADETE|~12:40 - 12:50^Campo Grande|SF - SB|CAD MAS|^Piscina|200 M|COMPETICIÓN|^Arena Ajedrez|Juego|CADETE|^Arena Petanca|Juego|CADETE|~12:50 - 12:55^Arena Ajedrez|Juego|CAD FEM|^Arena Petanca|Juego|CAD FEM|~12:50 - 13:20^Cross|Carrera|CAD FEM|~13:00 - 13:10^Campo Grande|SB - MC|CAD FEM|~13:10 - 13:15^Pádel|MC - SF|CAD FEM|~13:20 - 13:30^Campo Grande|SF - SB|CAD FEM|^Campo Pequeño|SB - MC|CAD FEM|^Gimnasio|MC - SF|CAD FEM|~13:30 - 13:35^Pádel|SF - SB|INFANTIL|^Piscina|Relevos|INFANTIL|~13:40 - 13:50^Campo Grande|MC - SF|CADETE|^Campo Pequeño|SF - SB|CADETE|^Gimnasio|SF - SB|CADETE|^Piscina|Relevos|CADETE|~13:50 - 13:55^Pádel|SB - MC|CADETE|~14:00 - 14:10^Campo Grande|SB - MC|CADETE|^Campo Pequeño|MC - SF|CADETE|^Gimnasio|MC - SB|CADETE|^Piscina|Libre|GENERAL|~14:20 - 14:30^Campo Grande|SB - MC|CADETE|^Gimnasio|SB - SF|CADETE|^Campo Pequeño|SB - MC|CADETE|^Pádel|MC - SF|CADETE|^Piscina|SB - SF|ALEVIN|^Arena Ajedrez|SB - MC|ALEVIN|~14:30 - 14:40^Campo Grande|SB - SF|CADETE|^Campo Pequeño|SB - SF|CADETE|^Pádel|SF - SB|CADETE|^Piscina|SB - SF|ALEVIN|~14:40 - 14:50^Campo Grande|SF - MC|CADETE|^Campo Pequeño|SF - MC|CADETE|^Pádel|SB - MC|CADETE|^Piscina|SF - MC|INFANTIL|~14:50 - 15:00^Campo Grande|Entrega de Trofeos y Clausura|CLAUSURA|Organización";
 
 const buildSchedule = () => SCHED_RAW.split('~').map(slotStr => {
@@ -158,20 +158,21 @@ export default function App() {
   
   const [schedule, setSchedule] = useState(() => {
     try {
-      const saved = window.localStorage.getItem('intercentros_schedule_v38');
+      const saved = window.localStorage.getItem('intercentros_schedule_v39');
       return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
     } catch (e) { return INITIAL_SCHEDULE; }
   });
 
   const [participants, setParticipants] = useState(() => {
     try {
-      const saved = window.localStorage.getItem('intercentros_participants_v38');
+      const saved = window.localStorage.getItem('intercentros_participants_v39');
       return saved ? JSON.parse(saved) : INITIAL_PARTICIPANTS;
     } catch (e) { return INITIAL_PARTICIPANTS; }
   });
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [editingItem, setEditingItem] = useState(null); 
+  const [rosterModal, setRosterModal] = useState(null); // NUEVO ESTADO PARA VER JUGADORES
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [adminPassword, setAdminPassword] = useState('');
@@ -297,7 +298,7 @@ export default function App() {
 
       if (newSchedule.length > 0) {
          setSchedule(newSchedule);
-         window.localStorage.setItem('intercentros_schedule_v38', JSON.stringify(newSchedule));
+         window.localStorage.setItem('intercentros_schedule_v39', JSON.stringify(newSchedule));
       }
     } catch (err) {
       console.error(err);
@@ -393,7 +394,7 @@ export default function App() {
     }
     
     setParticipants(newParticipants);
-    window.localStorage.setItem('intercentros_participants_v38', JSON.stringify(newParticipants));
+    window.localStorage.setItem('intercentros_participants_v39', JSON.stringify(newParticipants));
     if (!silent) setSyncStatus('✅ ¡Sincronización Completa con el Excel!');
     setIsSyncing(false);
   };
@@ -475,7 +476,6 @@ export default function App() {
     }).filter(slot => slot.events.length > 0);
   }, [schedule, selectedFacility, selectedSchoolFilter, showMyRoute, favoriteAthletesFullData]);
 
-  // Se modificó isTimeSlotActive para que sea independiente del DÍA del año, funcionando "hoy" tal y como pides.
   const isTimeSlotActive = (timeString) => {
     const timeToUse = isSimulatingLive ? new Date('2026-04-17T12:25:00') : currentTime; 
     
@@ -505,6 +505,59 @@ export default function App() {
     if (!selectedSport) return [];
     return participants.filter(p => p.sport === selectedSport);
   }, [selectedSport, participants]);
+
+  // --- LOGICA PARA EXTRAER PARTICIPANTES DE UN PARTIDO ESPECÍFICO ---
+  const getMatchParticipants = (event) => {
+    const sport = Object.keys(SPORT_TO_FACILITY).find(s => SPORT_TO_FACILITY[s].includes(event.facility));
+    if (!sport) return { team1: [], team2: [], general: [], schools: [] };
+
+    const matchObj = event.title.match(/^(SB|SF|MC)\s*-\s*(SB|SF|MC)$/);
+    const evtCatNorm = event.category.toUpperCase();
+
+    const matchCategory = (pCat) => {
+       const pNorm = pCat.toUpperCase();
+       if (evtCatNorm.includes('GENERAL') || evtCatNorm.includes('COMPETICIÓN') || evtCatNorm.includes('CLAUSURA')) return true;
+
+       const isInf = evtCatNorm.includes('INF');
+       const isCad = evtCatNorm.includes('CAD');
+       const isAle = evtCatNorm.includes('ALE');
+       const isBenj = evtCatNorm.includes('BENJ');
+
+       const isMas = evtCatNorm.includes('MAS') || evtCatNorm.includes('MASC');
+       const isFem = evtCatNorm.includes('FEM');
+       const isMix = evtCatNorm.includes('MIXTO') || (!isMas && !isFem);
+
+       const pIsInf = pNorm.includes('INF');
+       const pIsCad = pNorm.includes('CAD');
+       const pIsAle = pNorm.includes('ALE');
+       const pIsBenj = pNorm.includes('BENJ');
+
+       const pIsMas = pNorm.includes('MAS') || pNorm.includes('MASC');
+       const pIsFem = pNorm.includes('FEM');
+
+       if (isInf && !pIsInf) return false;
+       if (isCad && !pIsCad) return false;
+       if (isAle && !pIsAle) return false;
+       if (isBenj && !pIsBenj) return false;
+
+       if (!isMix) {
+         if (isMas && pIsFem) return false;
+         if (isFem && pIsMas) return false;
+       }
+
+       return true;
+    };
+
+    let relevantAthletes = participants.filter(p => p.sport === sport && matchCategory(p.category));
+
+    if (matchObj) {
+       const team1 = relevantAthletes.filter(p => p.school === matchObj[1]);
+       const team2 = relevantAthletes.filter(p => p.school === matchObj[2]);
+       return { team1, team2, general: [], schools: [matchObj[1], matchObj[2]] };
+    } else {
+       return { team1: [], team2: [], general: relevantAthletes, schools: [] };
+    }
+  };
 
   const handleAdminLogin = () => {
     if (isAdmin) {
@@ -536,12 +589,12 @@ export default function App() {
     if (editingItem.type === 'athlete') {
         const updated = participants.map(p => p.id === editingItem.data.id ? editingItem.data : p);
         setParticipants(updated);
-        window.localStorage.setItem('intercentros_participants_v38', JSON.stringify(updated));
+        window.localStorage.setItem('intercentros_participants_v39', JSON.stringify(updated));
     } else if (editingItem.type === 'match') {
         const updatedSchedule = [...schedule];
         updatedSchedule[editingItem.slotIndex].events[editingItem.eventIndex] = editingItem.data;
         setSchedule(updatedSchedule);
-        window.localStorage.setItem('intercentros_schedule_v38', JSON.stringify(updatedSchedule));
+        window.localStorage.setItem('intercentros_schedule_v39', JSON.stringify(updatedSchedule));
     }
     setEditingItem(null);
   };
@@ -615,7 +668,7 @@ export default function App() {
                  return (
                    <div key={fac} className="bg-white border border-indigo-100/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center shadow-sm hover:shadow-md transition-shadow">
                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg sm:text-xl mr-3 bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60`}>
-                       {facilityData?.icon && <facilityData.icon />}
+                       {facilityData?.icon}
                      </div>
                      <div>
                        <p className="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest">Instalación</p>
@@ -637,6 +690,101 @@ export default function App() {
     );
   };
 
+  const renderRosterModal = () => {
+    if (!rosterModal) return null;
+
+    const { team1, team2, general, schools } = getMatchParticipants(rosterModal);
+    const sport = Object.keys(SPORT_TO_FACILITY).find(s => SPORT_TO_FACILITY[s].includes(rosterModal.facility)) || 'Deporte';
+    const facIcon = FACILITIES[rosterModal.facility]?.icon || '🏆';
+
+    return (
+      <div className="fixed inset-0 z-[130] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200" onClick={() => setRosterModal(null)}>
+        <div className="bg-white rounded-[32px] w-full max-w-md shadow-2xl flex flex-col max-h-[85vh] overflow-hidden" onClick={e => e.stopPropagation()}>
+          
+          <div className="p-5 sm:p-6 bg-slate-50 border-b border-slate-100 relative">
+             <button onClick={() => setRosterModal(null)} className="absolute top-4 right-4 bg-white p-2 rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 shadow-sm border border-slate-100"><X className="w-5 h-5" /></button>
+             <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center text-2xl shadow-inner border border-indigo-200/50">
+                  {facIcon}
+                </div>
+                <div>
+                   <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-tight">{rosterModal.title}</h3>
+                   <p className="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider mt-0.5 flex items-center gap-1.5">
+                     <span className="bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded-md">{rosterModal.category}</span>
+                     <span className="bg-indigo-50 text-indigo-500 px-1.5 py-0.5 rounded-md border border-indigo-100">{sport}</span>
+                   </p>
+                </div>
+             </div>
+          </div>
+
+          <div className="p-5 sm:p-6 overflow-y-auto bg-white">
+             {schools.length === 2 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                   <div>
+                      <div className={`text-center py-2 rounded-xl text-white font-black text-xs sm:text-sm mb-4 shadow-sm ${SCHOOLS[schools[0]]?.badge || 'bg-slate-500'}`}>
+                         {SCHOOLS[schools[0]]?.name || schools[0]}
+                      </div>
+                      <div className="space-y-2">
+                         {team1.length > 0 ? team1.map(p => (
+                            <div key={p.id} className="text-sm font-bold text-slate-700 bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 flex items-center justify-between">
+                              {p.name}
+                              {favorites.includes(p.id) && <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />}
+                            </div>
+                         )) : <p className="text-xs text-slate-400 text-center italic">No hay jugadores registrados.</p>}
+                      </div>
+                   </div>
+                   <div>
+                      <div className={`text-center py-2 rounded-xl text-white font-black text-xs sm:text-sm mb-4 shadow-sm ${SCHOOLS[schools[1]]?.badge || 'bg-slate-500'}`}>
+                         {SCHOOLS[schools[1]]?.name || schools[1]}
+                      </div>
+                      <div className="space-y-2">
+                         {team2.length > 0 ? team2.map(p => (
+                            <div key={p.id} className="text-sm font-bold text-slate-700 bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 flex items-center justify-between">
+                              {p.name}
+                              {favorites.includes(p.id) && <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />}
+                            </div>
+                         )) : <p className="text-xs text-slate-400 text-center italic">No hay jugadores registrados.</p>}
+                      </div>
+                   </div>
+                </div>
+             ) : (
+                <div>
+                   {general.length > 0 ? (
+                      <div className="space-y-6">
+                         {Object.keys(SCHOOLS).map(schoolKey => {
+                            const scAthletes = general.filter(p => p.school === schoolKey);
+                            if(scAthletes.length === 0) return null;
+                            return (
+                               <div key={schoolKey}>
+                                  <div className={`text-center py-2 rounded-xl text-white font-black text-xs sm:text-sm mb-3 shadow-sm ${SCHOOLS[schoolKey]?.badge || 'bg-slate-500'}`}>
+                                     {SCHOOLS[schoolKey]?.name}
+                                  </div>
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                     {scAthletes.map(p => (
+                                        <div key={p.id} className="text-sm font-bold text-slate-700 bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 flex items-center justify-between">
+                                          {p.name}
+                                          {favorites.includes(p.id) && <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />}
+                                        </div>
+                                     ))}
+                                  </div>
+                               </div>
+                            )
+                         })}
+                      </div>
+                   ) : (
+                      <div className="text-center py-10">
+                         <Users className="w-10 h-10 text-slate-200 mx-auto mb-3" />
+                         <p className="text-sm text-slate-500 font-bold">No hay participantes registrados para esta categoría.</p>
+                      </div>
+                   )}
+                </div>
+             )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans pb-20 sm:pb-24 selection:bg-indigo-200">
       
@@ -645,7 +793,7 @@ export default function App() {
         
         {/* INDICADOR DE VERSIÓN (ESQUINA SUPERIOR IZQUIERDA) */}
         <div className="absolute top-3 left-3 sm:top-4 sm:left-4 text-[10px] text-slate-500 font-mono font-bold z-50 bg-white/5 px-2 py-1 rounded-lg backdrop-blur-md border border-white/10">
-           v38
+           v39
         </div>
 
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] opacity-40"></div>
@@ -774,7 +922,11 @@ export default function App() {
                     const defaultRef = FACILITIES[event.facility]?.defaultRef;
                     
                     return (
-                      <div key={evtIndex} className="snap-start shrink-0 w-[240px] sm:w-[280px] bg-white rounded-[20px] p-4 shadow-sm border border-red-200 transition-colors relative">
+                      <div 
+                         key={evtIndex} 
+                         onClick={() => setRosterModal(event)}
+                         className="snap-start shrink-0 w-[240px] sm:w-[280px] bg-white rounded-[20px] p-4 shadow-sm border border-red-200 transition-all relative cursor-pointer hover:ring-2 hover:ring-red-400 hover:shadow-lg"
+                      >
                          {isAdmin && (
                             <button onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: filteredSchedule.findIndex(s=>s.time === currentLiveSlot.time), eventIndex: evtIndex, data: event }); }} className="absolute -top-2 -right-2 p-2 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 rounded-full shadow-sm z-20">
                               <Edit3 className="w-3.5 h-3.5" />
@@ -818,9 +970,12 @@ export default function App() {
                               </div>
                             </div>
                             {(event.referee || defaultRef) && (
-                              <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
-                                <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
-                                <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
+                              <div className="flex items-center justify-between mt-2">
+                                <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
+                                  <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
+                                  <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[100px]">{event.referee || defaultRef}</span>
+                                </div>
+                                <div className="text-[9px] text-indigo-500 font-black flex items-center bg-indigo-50 px-2 py-1 rounded border border-indigo-100"><Users className="w-3 h-3 mr-1"/> Ver </div>
                               </div>
                             )}
                           </>
@@ -844,9 +999,12 @@ export default function App() {
                               )}
                             </div>
                             {(event.referee || defaultRef) && (
-                              <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2.5 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-lg w-fit">
-                                <ClipboardList className="w-3 h-3 mr-1.5 text-indigo-400" />
-                                <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
+                              <div className="flex items-center justify-between mt-2.5">
+                                <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-lg w-fit">
+                                  <ClipboardList className="w-3 h-3 mr-1.5 text-indigo-400" />
+                                  <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[100px]">{event.referee || defaultRef}</span>
+                                </div>
+                                <div className="text-[9px] text-indigo-500 font-black flex items-center bg-indigo-50 px-2 py-1 rounded border border-indigo-100"><Users className="w-3 h-3 mr-1"/> Ver</div>
                               </div>
                             )}
                           </div>
@@ -961,13 +1119,27 @@ export default function App() {
                           const defaultRef = FACILITIES[event.facility]?.defaultRef;
 
                           return (
-                            <div key={evtIndex} className={`bg-white rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border transition-all duration-300 group hover:-translate-y-1 relative ${isHighlightedBySchool ? 'ring-2 ring-indigo-400 border-transparent shadow-lg' : isLive ? 'border-red-100 hover:border-red-300 hover:shadow-lg ring-1 ring-red-50' : 'border-slate-100 hover:border-indigo-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]'}`}>
+                            <div 
+                               key={evtIndex} 
+                               onClick={() => setRosterModal(event)}
+                               className={`bg-white rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border transition-all duration-300 group hover:-translate-y-1 cursor-pointer hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] relative ${isHighlightedBySchool ? 'ring-2 ring-indigo-400 border-transparent shadow-lg' : isLive ? 'border-red-100 hover:border-red-300 hover:shadow-lg ring-1 ring-red-50 hover:ring-red-400' : 'border-slate-100 hover:border-indigo-300 hover:ring-1 hover:ring-indigo-300'}`}
+                            >
                               
+                              {/* ADMIN EDIT BUTTON */}
+                              {isAdmin && (
+                                <button 
+                                  onClick={(e) => { e.stopPropagation(); setEditingItem({ type: 'match', slotIndex: index, eventIndex: evtIndex, data: event }); }}
+                                  className="absolute top-3 right-3 p-2 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 rounded-full shadow-sm z-20"
+                                >
+                                  <Edit3 className="w-4 h-4" />
+                                </button>
+                              )}
+
                               <div className="flex justify-between items-start mb-3 sm:mb-4">
                                 <span className={`text-[10px] sm:text-[11px] font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl border ${style.color} flex items-center w-fit shadow-sm`}>
-                                  <span className="mr-1.5 text-xs sm:text-sm">{style.icon}</span> {event.facility}
+                                  <span className="mr-1.5 text-xs sm:text-sm"></span> {event.facility}
                                 </span>
-                                <span className={`text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-md sm:rounded-lg tracking-wider uppercase`}>
+                                <span className={`text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-md sm:rounded-lg tracking-wider uppercase ${isAdmin ? 'mr-8' : ''}`}>
                                   {event.category}
                                 </span>
                               </div>
@@ -1008,9 +1180,12 @@ export default function App() {
                                       </div>
                                       {/* ENCARGADO / ÁRBITRO DEL PARTIDO */}
                                       {(event.referee || defaultRef) && (
-                                        <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
-                                          <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
-                                          <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
+                                        <div className="flex items-center justify-between mt-2">
+                                          <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-2 py-1 rounded-md w-fit">
+                                            <ClipboardList className="w-3 h-3 mr-1 text-indigo-400" />
+                                            <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[100px]">{event.referee || defaultRef}</span>
+                                          </div>
+                                          <div className="text-[9px] text-indigo-500 font-black flex items-center bg-indigo-50 px-2 py-1 rounded border border-indigo-100 group-hover:bg-indigo-500 group-hover:text-white transition-colors"><Users className="w-3 h-3 mr-1"/> Ver Jugadores</div>
                                         </div>
                                       )}
                                     </>
@@ -1038,9 +1213,12 @@ export default function App() {
                                     </div>
                                     {/* ENCARGADO / ÁRBITRO EVENTO GENERAL */}
                                     {(event.referee || defaultRef) && (
-                                      <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 mt-2.5 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-lg w-fit">
-                                        <ClipboardList className="w-3 h-3 mr-1.5 text-indigo-400" />
-                                        <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[150px] sm:max-w-[200px]">{event.referee || defaultRef}</span>
+                                      <div className="flex items-center justify-between mt-2.5">
+                                        <div className="flex items-center text-[9px] sm:text-[10px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-lg w-fit">
+                                          <ClipboardList className="w-3 h-3 mr-1.5 text-indigo-400" />
+                                          <span className="opacity-80">Resp:</span>&nbsp;<span className="text-slate-700 truncate max-w-[100px]">{event.referee || defaultRef}</span>
+                                        </div>
+                                        <div className="text-[9px] text-indigo-500 font-black flex items-center bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-indigo-100 group-hover:bg-indigo-500 group-hover:text-white transition-colors"><Users className="w-3 h-3 mr-1.5"/> Ver Atletas</div>
                                       </div>
                                     )}
                                   </div>
@@ -1221,6 +1399,9 @@ export default function App() {
           </button>
         </div>
       </div>
+
+      {/* ===================== MODAL DE JUGADORES DEL PARTIDO ===================== */}
+      {renderRosterModal()}
 
       {/* ===================== MODAL DE LOGIN ADMIN ===================== */}
       {showAdminLogin && !isAdmin && (
